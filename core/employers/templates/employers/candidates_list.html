@@ -1,0 +1,49 @@
+
+{% load static %}
+
+{% block content %}
+
+
+
+<style>
+    .jobs-single{
+      background-color: #ACE2E1;
+    }
+    .info{
+      background-color: #ACE2E1;
+    }
+  </style>
+
+ 
+  <h1>hello</h1>
+  {% for user in users %}
+  
+  
+  <div class="card mt-3 mb-3 p-4 shadow jobs-single" style="max-width:90%">
+      <div class="row">
+        <div class="col-md-4 info">
+          <img src="{{user.avatar.url}}" class="img-fluid rounded-start info" alt="OOPS">
+        </div>
+        <div class="col-md-8">
+          <div class="card-body info">
+            
+            <ul class="list-group list-group-flush info">
+              <li class="list-group-item info"><a href="{% url 'candidate_description' user.id %}"><h5>{{user.name}}</h5></a></li>
+              <li class="list-group-item info"><strong>Education </strong>{{user.education}}</li>
+              <li class="list-group-item info"><strong>Location: </strong>{{user.location}}</li>
+              <li class="list-group-item info"><strong>Skills </strong>{{user.skills}}</li>
+              <li class="list-group-item info"><strong>Experience </strong>{{user.experience}}</li>
+           
+              
+            </ul>
+            <!-- <p class="card-text">{{job.job_type}}</p> -->
+            <!-- <p class="card-text"><small class="text-body-secondary">{{job.created | timesince }}  ago</small></p> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    {% endfor %}
+
+
+{% endblock %}

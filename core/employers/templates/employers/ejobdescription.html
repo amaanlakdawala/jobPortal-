@@ -1,0 +1,321 @@
+{% extends 'emain.html' %}
+
+{% load static %}
+{% block content %}
+
+
+<style>
+    .info{
+      background-color: #ACE2E1;
+    }
+    .tables{
+      background-color: #008DDA;
+    }
+    .custom-table {
+              background-color: #008DDA;
+              border-collapse: collapse;
+              width: 100%;
+              text-align: center;
+          }
+          
+          .custom-table th,
+          .custom-table td {
+              border: 1px solid #ddd;
+              padding: 8px;
+              text-align: left;
+          }
+          
+          .custom-table th {
+              background-color: #008DDA;
+              color: #fff;
+          }
+          .overview{
+            text-align: center;
+          }
+          
+         
+  </style>
+  
+  
+      <div class="col-md-9 ">
+        <div class="card mb-3 p-3 info" style="max-width: 540px;">
+          <div class="row g-0 info">
+            <div class="col-md-4">
+              <img src="{{request.user.logo.url}}" class="img-fluid rounded-start info" alt="OOPS">
+            </div>
+            <div class="col-md-8">
+              <div class="card-body info">
+               
+                <ul class="list-group list-group-flush">
+                  <li  class="list-group-item info"><h5 class="card-title"><a href="{% url 'ejobdescription' job.id %}">{{job.role}}</a></h5></li>
+                  <li class="list-group-item info"><i class="bi bi-buildings-fill"></i>   {{job.organization}}</li>
+                  <li class="list-group-item info"><i class="bi bi-geo-alt-fill"></i>    {{job.location}}</li>
+                  <li class="list-group-item info"><i class="bi bi-currency-rupee"></i>   {{job.salary}}</li>
+                </ul>
+              </div>
+          </div>
+        </div>
+      </div>
+      
+      
+      <div>
+          <h3>About Company</h3>
+          <p>{{request.user.about}}</p>
+      </div>
+  
+      <div>
+        <h3>Work Culture</h3>
+        <div  class="embed-responsive embed-responsive-16by9">
+          <video controls class="embed-responsive-item"  style="max-width: 50%; max-height: 50%;">
+              <source src="{{request.user.video.url}}" type="video/mp4">
+              Your browser does not support the video tag.
+          </video>
+      </div>
+      </div>
+      
+      
+      
+      <div>
+          <h3>Experience</h3>
+          <p>{{job.experience}}</p>
+      </div>
+      
+      
+      <div>
+          <h3>Education</h3>
+          <p>{{job.education}}</p>
+      </div>
+      </div>
+      <div class="col-md-3 ">
+        <!-- <table class=" table table-primary " >
+          <thead class="tables">
+            <tr class="">
+             
+              <th scope="col">Job Overview</th>
+              <th scope="col"></th>
+              
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              
+              <td>Location:</td>
+              <td>{{job.location}}</td>
+              
+            </tr>
+            <tr>
+              
+              <td>Vacancy:</td>
+              <td>{{job.vacancy}}</td>
+              
+            </tr>
+      
+            <tr>
+              
+              <td>Job Type:</td>
+              <td>{{job.job_type}}</td>
+              
+            </tr>
+      
+            <tr>
+              
+              <td>Salary:</td>
+              <td>{{job.salary}}</td>
+              
+            </tr>
+      
+            <tr class="info">
+              
+              <td>Application End Date: </td>
+              <td>{{job.application_date}}</td>
+              
+            </tr>
+      
+            <tr>
+              {% if request.user.is_authenticated %}
+             
+              <form action="" method="POST" id="submit-form">
+                {% csrf_token %}
+                <td colspan="2"><button type="submit" id="applyButton" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-primary">Apply</button></td>
+                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                  Apply
+                </button> -->
+                <!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        ...
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+         -->
+              <!-- </form>
+             
+              {% endif %} -->
+               <!-- Button trigger modal -->
+  
+  
+  
+              
+              
+              
+            <!-- </tr> -->
+      
+      
+           
+          <!-- </tbody>
+        </table> -->
+  
+        <table class="custom-table">
+          <thead>
+              <tr >
+                  <th style="text-align: center;" colspan="2">Job Overview</th>
+                  
+              </tr>
+          </thead>
+          <tbody>
+              <tr class="info">
+                  <td>Location:</td>
+                  <td>{{ job.location }}</td>
+              </tr>
+              <tr class="info">
+                  <td>Vacancy:</td>
+                  <td>{{ job.vacancy }}</td>
+              </tr>
+              <tr class="info">
+                  <td>Job Type:</td>
+                  <td>{{ job.job_type }}</td>
+              </tr>
+              <tr class="info">
+                  <td>Salary:</td>
+                  <td>{{ job.salary }}</td>
+              </tr>
+              <tr class="info">
+                  <td>Application End Date:</td>
+                  <td>{{ job.application_date }}</td>
+              </tr>
+             
+          </tbody>
+      </table>
+      
+  
+  
+  
+  
+  
+  <!-- <div class="card mb-3" style="max-width: 540px;">
+      <div class="row g-0">
+        <div class="col-md-4">
+          <img src="{{job.organization.avatar.url}}" class="img-fluid rounded-start" alt="OOPS">
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title"><a href="{% url 'job_description' job.id %}">{{job.role}}</a></h5>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item"><i class="bi bi-buildings-fill"></i>   {{job.organization}}</li>
+              <li class="list-group-item"><i class="bi bi-geo-alt-fill"></i>    {{job.location}}</li>
+              <li class="list-group-item"><i class="bi bi-currency-rupee"></i>   {{job.salary}}</li>
+            </ul>
+          </div>
+      </div>
+    </div>
+  </div> -->
+  
+  
+  <!-- <div>
+      <h3>About Company</h3>
+      <p>{{job.organization.about}}</p>
+  </div>
+  
+  
+  
+  <div>
+      <h3>Experience</h3>
+      <p>{{job.experience}}</p>
+  </div>
+  
+  
+  <div>
+      <h3>Education</h3>
+      <p>{{job.education}}</p>
+  </div> -->
+  
+  
+  
+  <!-- <table class="table">
+      <thead>
+        <tr>
+         
+          <th scope="col">Job Overview</th>
+          <th scope="col"></th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          
+          <td>Location:</td>
+          <td>{{job.location}}</td>
+          
+        </tr>
+        <tr>
+          
+          <td>Vacancy:</td>
+          <td>{{job.vacancy}}</td>
+          
+        </tr>
+  
+        <tr>
+          
+          <td>Job Type:</td>
+          <td>{{job.job_type}}</td>
+          
+        </tr>
+  
+        <tr>
+          
+          <td>Salary:</td>
+          <td>{{job.salary}}</td>
+          
+        </tr>
+  
+        <tr>
+          
+          <td>Application End Date: </td>
+          <td>{{job.application_date}}</td>
+          
+        </tr>
+  
+        <tr>
+          {% if request.user.is_authenticated %}
+          <div id="applied">
+            
+          </div>
+          <form action="" method="POST">
+            {% csrf_token %}
+            <td><button type="submit" id="applyButton">Apply</button></td>
+          </form>
+          
+  
+          {% endif %}
+          
+          
+          
+        </tr>
+  
+  
+       
+      </tbody>
+    </table> -->
+
+{% endblock %}

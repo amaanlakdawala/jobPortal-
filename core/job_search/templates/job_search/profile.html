@@ -1,0 +1,127 @@
+{% extends 'job_search/home.html' %}
+
+{% block content %}
+<style>
+    .roles{
+        background-color: #0056B3;;
+    }
+    .roles-list{
+        background-color: #ACE2E1;
+    }
+    .main{
+        background-color: white;
+    }
+    .applied_in_company{
+        color: white;
+        
+    }
+</style>
+
+<h1>This is profile</h1>
+
+        <div class="col-md-3 ">
+            {% include 'job_search/roles.html' %}
+        </div>
+        
+        <div class="col-md-6">
+
+
+            <div class=" card border-opacity-10 main" style="width: 35.6rem;">
+                <img src="{{request.user.avatar.url}}" class="img-fluid card-img-top mx-auto rounded-lg" style="width: 50%;" alt="">
+                <div class="card-body mx-auto mt-1 main">
+                  <p class="card-text mt-2 main"><strong>Name:</strong> {{request.user.name}}</p>
+                  <p class="card-text mt-2 main"> <strong>Email:</strong> {{request.user.email}}</p>
+                  <p class="card-text mt-2 main"> <strong>Phone:</strong> {{request.user.phone}}</p>
+                  <p class="card-text mt-2 main"> <strong>Skills:</strong> {{request.user.skills}}</p>
+                  <p class="card-text mt-2 main"><strong>Bio:</strong> {{request.user.bio}}</p>
+                  {% if request.user.cv %}
+                  <p class="card-text main"><strong>Resume:</strong>  <a href="{{request.user.cv.url}}">Download Now</a></p>
+                  {% else %}
+                  <p class="card-text main"><strong>Resume:</strong> Not uploaded yet</p>
+                  {% endif %}
+                  <p class="card-text main"> <a href="{% url 'update_profile' request.user.id %}" class="btn btn-primary">Update Profile</a></p>
+                </div>
+              </div>
+        
+        </div>
+             
+        
+        
+        
+        
+        
+        <div class="col-md-3">
+            <div class="card" style="width: 18rem;">
+                <div class="card-header roles">
+                    <h1 class="applied_in_company">Applied in Companies</h1>
+                </div>
+                <ul class="list-group list-group-flush">
+                    {% for job_appilcation in job_appilcations %}
+
+
+                  <li class="list-group-item roles-list"> <p>{{ forloop.counter }}: Company: <strong>{{job_appilcation.jobs.organization}}</strong></p>
+                    <p>Role:  <strong>{{job_appilcation.jobs}}</strong></p>
+                    <p>Applied On: <strong> {{job_appilcation.appplied_at}}
+                    </strong></p>
+                    <hr>               
+                </li>
+                {% endfor %}
+                 
+                </ul>
+              </div>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            <!-- <div>
+               
+            
+               
+                <ul>
+                    <li>
+                       
+                       
+                       
+                    </li>
+                </ul>
+                  
+               
+               
+            
+            </div>
+        </div> -->
+        
+
+    </div>
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

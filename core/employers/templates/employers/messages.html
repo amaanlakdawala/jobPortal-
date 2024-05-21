@@ -1,0 +1,121 @@
+{% extends 'emain.html' %}
+
+{% load static %}
+{% block content %}
+<h1>messages</h1>
+{% for room in rooms %}
+
+<div class="card mt-3 mb-3 p-4 shadow jobs-single" style="max-width:90%">
+    <div class="row">
+      <div class="col-md-4 info">
+        <img src="{{room.user.avatar.url}}" class="img-fluid rounded-start info" alt="OOPS">
+      </div>
+      <div class="col-md-8">
+        <div class="card-body info">
+          
+          <ul class="list-group list-group-flush info">
+            <li class="list-group-item info"><a href="{% url 'chat' room.id %}"><h5>{{room.user.name}}</h5></a></li>
+            <li class="list-group-item info"><strong>Education </strong>{{room.user.education}}</li>
+            <li class="list-group-item info"><strong>Location: </strong>{{room.user.location}}</li>
+            <li class="list-group-item info"><strong>Skills </strong>{{room.user.skills}}</li>
+            <li class="list-group-item info"><strong>Experience </strong>{{room.user.experience}}</li>
+
+            <form action="" method="POST">
+    
+              {% csrf_token %}
+              <input type="hidden" name="user_id" value="{{ room.user.id }}">
+              <li class="list-group-item info"><strong><input class="btn btn-primary" type="submit" value="Delete"></strong></li>
+            </form>
+            
+            
+          </ul>
+          <!-- <p class="card-text">{{job.job_type}}</p> -->
+          <!-- <p class="card-text"><small class="text-body-secondary">{{job.created | timesince }}  ago</small></p> -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% endfor %}
+
+
+<!-- <style>
+    .info{
+      background-color: #ACE2E1;
+    }
+    .tables{
+      background-color: #008DDA;
+    }
+    .custom-table {
+              background-color: #008DDA;
+              border-collapse: collapse;
+              width: 100%;
+              text-align: center;
+          }
+          
+          .custom-table th,
+          .custom-table td {
+              border: 1px solid #ddd;
+              padding: 8px;
+              text-align: left;
+          }
+          
+          .custom-table th {
+              background-color: #008DDA;
+              color: #fff;
+          }
+          .overview{
+            text-align: center;
+          }
+          .contact{
+            color: white;
+            text-decoration: none;
+          }
+
+         
+          
+         
+  </style>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-7">
+
+            <h1>messages</h1>
+
+        </div>
+
+        <div class="col-md-5">
+            <table class="custom-table">
+                <thead>
+                    <tr >
+                        <th style="text-align: center;" colspan="2">Candidate Overview</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="info">
+                        <td>Name</td>
+                        <td>{{ user.name }}</td>
+                    </tr>
+                    <tr class="info">
+                        <td>Email:</td>
+                        <td>{{ user.email }}</td>
+                    </tr>
+                    <tr class="info">
+                        <td>Phone:</td>
+                        <td>{{ user.phone }}</td>
+                    </tr>
+                   
+                    
+                </tbody>
+            </table>
+         
+        </div>
+    </div>
+</div> -->
+
+
+
+{% endblock %}

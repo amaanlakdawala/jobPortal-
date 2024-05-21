@@ -1,0 +1,43 @@
+{% extends 'emain.html' %}
+{% block content %}
+
+
+<form action="" method="POST">
+    {% csrf_token %}
+    <label for="">Organization</label>
+    <input type="text" name ='organization'>
+
+    <label for="">Role</label>
+    <input type="text" name ='role'>
+
+    <label for="">Skill</label>
+    <input type="text" name ='skill'>
+
+    <label for="">Salary</label>
+    <input type="text" name ='salary'>
+
+    <label for="">Location</label>
+    <input type="text" name ='location'>
+
+    <!-- <label for="">Name</label>
+    <input type="text" name ='name'> -->
+
+    <label for="">Job-Type</label>
+    <input type="text" name ='job_type'>
+
+    <label for="">Vacancy</label>
+    <input type="number" name="vacancy">
+
+    <label for="">Experience</label>
+    <input type="text" name="experience">
+
+    <label for="">Education</label>
+    <input type="text" name="education">
+
+    <label for="">Application Date</label>
+    <input type="date" name="application_date">
+
+    <button type="submit">Post</button>
+</form>
+
+{% endblock %}

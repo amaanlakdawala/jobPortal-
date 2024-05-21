@@ -1,0 +1,226 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<style>
+     .main{
+        background-color: white;
+       
+    }
+    .heading{
+        background-color: #0056B3;
+        width: fit-content;
+        color: white;
+        
+    }
+    .full_filter{
+        height: fit-content;
+       
+    }
+</style>
+
+    <div class="col-md-9">
+        {% include 'job_search/jobs.html' %}
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                {% if finaljobs.has_previous %}
+              <li class="page-item"><a class="page-link" href="/job_listing/?page={{finaljobs.previous_page_number}}">Previous</a></li>
+              {% endif %}
+              {% for n in totalpage %}
+              <li class="page-item"><a class="page-link" href="/job_listing/?page={{n}}">{{n}}</a></li>
+              {% endfor %}
+              
+             
+              {% if finaljobs.has_next %}
+              <li class="page-item"><a class="page-link" href="/job_listing/?page={{finaljobs.next_page_number}}">Next</a></li>
+              {% endif %}
+            </ul>
+          </nav>
+    </div>
+
+    <div class="full_filter col-md-3 card shadow rounded-lg main " >
+        <form  method="POST">
+            {% csrf_token %}
+        
+        
+        <div class=" job-category-listing mb-50 card-body main">
+            <!-- single one -->
+            <div class="single-listing main">
+               
+                <!--  Select job items End-->
+                <!-- select-Categories start -->
+                <div class="select-Categories pt-80 pb-50 main">
+                    <div class="small-section-tittle2 main">
+                        <h4 class="heading">Job Type</h4>
+                        <hr>
+                    </div>
+                    <label class="container ">All
+                        <input type="checkbox" value="All"  name="job_type" checked="checked" >
+                        <span class="checkmark"></span>
+                    </label>
+                  <hr>
+                    <label class="container  ">Full Time
+                        <input type="checkbox" name="job_type" value="Full-Time" >
+                        <span class="checkmark"></span>
+                    </label>
+                    <hr>
+                   
+                    <label class="container  ">Part Time
+                        <input type="checkbox"   name="job_type" value="Part-Time" >
+                        <span class="checkmark"></span>
+                    </label>
+                    <hr>
+                    <label class="container  ">Remote
+                        <input type="checkbox"  name="job_type" value="Remote">
+                        <span class="checkmark"></span>
+                    </label>
+                    <hr>
+                  <label class="container">Internship
+                        <input type="checkbox"  name="job_type" value="Internship">
+                        <span class="checkmark"></span>
+                    </label>
+                    <hr>
+                </div>
+                <!-- select-Categories End -->
+            </div>
+           
+            <!-- single two -->
+            <div class="single-listing">
+               <div class="small-section-tittle2">
+                     <h4 class="heading">Job Location</h4>
+                     <hr>
+               </div>
+                <!-- Select job items start -->
+                <div class="select-job-items2">
+                    <select name="select">
+                        <option name="Anywhere" value="Anywhere">Anywhere</option>
+                        <option name="location" value="Mumbai">Mumbai</option>
+                        <option  name="location" value="Delhi">Delhi</option>
+                        <option name="location" value="Chennai">Chennai</option>
+                        <option name="location" value="Bengaluru">Bengaluru</option>
+                    </select>
+                    <hr>
+                </div>
+                <!--  Select job items End-->
+                <!-- select-Categories start -->
+                <div class="select-Categories pt-80 pb-50">
+                    <div class="small-section-tittle2">
+                        <h4 class="heading">Experience</h4>
+                        <hr>
+                    </div>
+                    <label class="container">Fresher
+                        <input name="experience" value="Fresher" type="checkbox" >
+                        <span class="checkmark"></span>
+                    </label>
+                    <hr>
+                    <label class="container">1 Years
+                        <input type="checkbox" name="experience" value="1 Years"  checked="checked">
+                        <span class="checkmark"></span>
+                    </label>
+                    <hr>
+                    <label class="container">2 Years
+                        <input type="checkbox" name="experience" value="2 Years">
+                        <span class="checkmark"></span>
+                    </label>
+                    <hr>
+                    <label class="container">3 Years
+                        <input type="checkbox" name="experience" value="3 Years">
+                        <span class="checkmark"></span>
+                    </label>
+                    <hr>
+                    <label class="container">4 Years
+                        <input type="checkbox" name="experience" value="4 Years">
+                        <span class="checkmark"></span>
+                    </label>
+                    <hr>
+                    <label class="container">5 Years and Above
+                        <input type="checkbox" name="experience" value="5 Years and Above">
+                        <span class="checkmark"></span>
+                    </label>
+                    <hr>
+                </div>
+                <!-- select-Categories End -->
+            </div>
+            <!-- single three -->
+            <div class="single-listing">
+                <!-- select-Categories start -->
+                <div class="select-Categories pb-50">
+                    <div class="small-section-tittle2">
+                        <h4 class="heading">Posted Within</h4>
+                        <hr>
+                    </div>
+                    <label class="container">Any
+                        <input type="checkbox" name="created" value="Any">
+                        <span class="checkmark"></span>
+                    </label>
+                    <hr>
+                    <label class="container">Today
+                        <input type="checkbox" name="created" value="Today" checked="checked active">
+                        <span class="checkmark"></span>
+                    </label>
+                    <hr>
+                    <label class="container">Last 2 days
+                        <input type="checkbox" name="created" value="Last 2 days">
+                        <span class="checkmark"></span>
+                    </label>
+                    <hr>
+                    <label class="container">Last 3 days
+                        <input type="checkbox" name="created" value="Last 3 days">
+                        <span class="checkmark"></span>
+                    </label>
+                    <hr>
+                    <label class="container">Last 5 days
+                        <input type="checkbox" name="created" value="Last 5 days">
+                        <span class="checkmark"></span>
+                    </label>
+                    <hr>
+                    <label class="container">Last 10 days
+                        <input type="checkbox" name="created" value="Last 10 days">
+                        <span class="checkmark"></span>
+                    </label>
+                    <hr>
+                </div>
+                <!-- select-Categories End -->
+                <div>
+                    <h3 class="heading">
+                        Salary Range
+                    </h3>
+                    <hr>
+                    
+                    <input name="max_salary" id="max_salary_range" type="range" min="0" max="10000" step="100" oninput="updateSalaryRange()">
+                    <hr>
+                    <span id="selected_salary_range">MIN:0 | Max:0</span>
+                    <hr>
+                </div>
+                <input type="submit" value="Search" name="submit-button" class="btn btn-primary">
+            </div>
+            </form>
+    </div>
+    
+   
+    
+
+</div>
+
+
+
+
+
+
+
+
+      
+
+    <script>
+        function updateSalaryRange () {
+        var rangeSelector = document.getElementById('max_salary_range')
+        var minRange = rangeSelector.min
+        var maxRange = rangeSelector.max
+        var selectedRange = rangeSelector.value
+        var spanTag = document.getElementById('selected_salary_range')
+        spanTag.textContent = ` Min:${minRange} | Max:${selectedRange} `
+
+        }
+       
+    </script>
+
+{% endblock %}

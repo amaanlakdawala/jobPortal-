@@ -1,0 +1,199 @@
+{% extends 'emain.html' %}
+
+
+{% block content %}
+{% load static %}
+
+
+<style>
+    .info{
+      background-color: #ACE2E1;
+    }
+    .tables{
+      background-color: #008DDA;
+    }
+    .custom-table {
+              background-color: #008DDA;
+              border-collapse: collapse;
+              width: 100%;
+              text-align: center;
+          }
+          
+          .custom-table th,
+          .custom-table td {
+              border: 1px solid #ddd;
+              padding: 8px;
+              text-align: left;
+          }
+          
+          .custom-table th {
+              background-color: #008DDA;
+              color: #fff;
+          }
+          .overview{
+            text-align: center;
+          }
+          .contact{
+            color: white;
+            text-decoration: none;
+          }
+
+         
+          
+         
+  </style>
+  <div class="container">
+    <div class="row ">
+        <div class="col-md-9 ">
+            <div class="card mb-3 p-3 info" style="max-width: 540px;">
+                <div class="row g-0 info">
+                    <div class="col-md-4">
+                        <img src="{{ user.avatar.url }}" class="img-fluid rounded-start info" alt="OOPS">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body info">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item info"><strong>Education </strong>{{ user.education }}</li>
+                                <li class="list-group-item info"><strong>Location: </strong>{{ user.location }}</li>
+                                <li class="list-group-item info"><strong>Skills </strong>{{ user.skills }}</li>
+                                <li class="list-group-item info"><strong>Experience </strong>{{ user.experience }}</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <h3>Bio</h3>
+                <p>{{ user.bio }}</p>
+            </div>
+
+            <div>
+                <h3>Video Presentation</h3>
+                <div class="embed-responsive embed-responsive-16by9">
+                    {% if user.video %}
+                    <video controls class="embed-responsive-item" style="max-width: 50%; max-height: 50%;">
+                        <source src="{{ user.video.url }}" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    {% else %}
+                    <p>no video available</p>
+                    {% endif %}
+                </div>
+            </div>
+
+           
+
+            <div>
+                <h3>Resume</h3>
+                <p><a href="{{ user.cv.url }}">view here</a></p>
+            </div>
+        </div>
+ 
+
+  
+  <!-- <div class="container mx-auto">
+    <div class="row justify-content-center mx-auto">
+      <div class="col-md-12">
+        <div class="card mb-3 p-3 info" style="max-width: 540px;">
+          <div class="row g-0 info">
+            <div class="col-md-4">
+              <img src="{{user.avatar.url}}" class="img-fluid rounded-start info" alt="OOPS">
+            </div>
+            <div class="col-md-8">
+              <div class="card-body info">
+               
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item info"><strong>Education </strong>{{user.education}}</li>
+                    <li class="list-group-item info"><strong>Location: </strong>{{user.location}}</li>
+                    <li class="list-group-item info"><strong>Skills </strong>{{user.skills}}</li>
+                    <li class="list-group-item info"><strong>Experience </strong>{{user.experience}}</li>
+                </ul>
+              </div>
+          </div>
+        </div>
+      </div>
+      
+      
+      <div>
+          <h3>Bio</h3>
+          <p>{{user.bio}}</p>
+      </div>
+  
+      <div>
+        <h3>Video Presentation</h3>
+        <div  class="embed-responsive embed-responsive-16by9">
+            {% if user.video %}
+          <video controls class="embed-responsive-item"  style="max-width: 50%; max-height: 50%;">
+              <source src="{{user.video.url}}" type="video/mp4">
+              Your browser does not support the video tag.
+          </video>
+          {% else %}
+          <p>no video available</p>
+
+          {% endif %}
+      </div>
+      </div>
+      
+      
+      
+      <div>
+          <h3>Projects</h3>
+          <p>{{user.experience}}</p>
+      </div>
+      
+      
+      <div>
+          <h3>Achievements</h3>
+          <p>{{user.education}}</p>
+      </div>
+
+
+      <div>
+        <h3>Resume</h3>
+        <p><a href="{{user.cv.url}}">view here</a></p>
+    </div>
+
+
+      </div>
+    </div>
+    </div> -->
+      <div class="col-md-3 ">
+      
+        <table class="custom-table">
+          <thead>
+              <tr >
+                  <th style="text-align: center;" colspan="2">Candidate Overview</th>
+                  
+              </tr>
+          </thead>
+          <tbody>
+              <tr class="info">
+                  <td>Name</td>
+                  <td>{{ user.name }}</td>
+              </tr>
+              <tr class="info">
+                  <td>Email:</td>
+                  <td>{{ user.email }}</td>
+              </tr>
+              <tr class="info">
+                  <td>Phone:</td>
+                  <td>{{ user.phone }}</td>
+              </tr>
+             
+              <tr class="info">
+                  {% if request.user.is_authenticated %}
+                  <form action="" method="POST" id="submit-form">
+                      {% csrf_token %}
+                      <!-- iski id leke room automatic create hona chaiye -->
+                      <td colspan="2"><button type="submit" id="applyButton" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-primary">Contact</button></td>
+                  </form>
+                  {% endif %}
+              </tr>
+          </tbody>
+      </table>
+    </div>
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,59 @@
+{% extends 'emain.html' %}
+{% block content %}
+{% load static %}
+<style>
+    .employer_hero{
+        width: 84%;
+        height: 22rem;
+    }
+    .employer_hero_text h1{
+        line-height: 1.5;
+    }
+    .employer_hero_button {
+        background-color: #007bff; /* Blue background */
+        color: #fff; /* White text color */
+        padding: 10px 20px; /* Padding around text */
+        border: none; /* No border */
+        border-radius: 5px; /* Rounded corners */
+        font-size: 18px; /* Font size */
+        cursor: pointer; /* Cursor style */
+        transition: background-color 0.3s; /* Smooth transition */
+    }
+
+    .employer_hero_button:hover {
+        background-color: #0056b3; /* Darker blue on hover */
+    }
+    .employer_job_posted{
+        text-align: center;
+    }
+  
+
+</style>
+<div class="row mx-auto ms-5 d-flex">
+<div class="col-md-5 ms-5 mt-5">
+    <div class="employer_hero_text">
+        <h1 class="mt-5">Hire Great Talent For <br> Your Organization</h1>
+        <a href="{% url 'epostjob' %}" class="mt-5 btn btn-primary employer_hero_button">Post Job</a>
+    </div>
+</div>
+<div class="col-md-6 mb-5" >
+    <img  class="img-fluid employer_hero" src="{% static 'images/employer_hero.png' %}" alt="">
+</div>
+</div>
+
+
+<div class="ms-5">
+    <!-- <h1>Jobs Posted By you</h1>
+    {% for job in jobs %}
+    <p>{{job.name}}</p>
+    {% endfor %} -->
+    <h1 class="employer_job_posted mt-5 mb-5">Jobs Posted By You</h1>
+
+    {% include 'employers/ejobs.html' %}
+
+</div>
+   
+   
+
+
+{% endblock %}

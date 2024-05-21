@@ -1,0 +1,315 @@
+/* 引入需要的字体 */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: 'Poppins', sans-serif;
+}
+
+body {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 100vh;
+	flex-direction: column;
+	background: white;
+}
+
+.box {
+	position: relative;
+	width: 380px;
+	height: 420px;
+	background: blue;
+	border-radius: 20px;
+	overflow: hidden;
+}
+
+.box::before {
+	content: '';
+	z-index: 1;
+	position: absolute;
+	top: -50%;
+	left: -50%;
+	width: 380px;
+	height: 420px;
+	transform-origin: bottom right;
+	background: linear-gradient(0deg, transparent,  #FFC107,  #FFC107);
+	animation: animate 6s linear infinite;
+}
+
+.box::after {
+	content: '';
+	z-index: 1;
+	position: absolute;
+	top: -50%;
+	left: -50%;
+	width: 380px;
+	height: 420px;
+	transform-origin: bottom right;
+	background: linear-gradient(0deg, transparent,  #FFC107, #FFC107);
+	animation: animate 6s linear infinite;
+	animation-delay: -3s;
+}
+
+
+.box1 {
+	position: relative;
+	width: 380px;
+	height: 650px;
+	background: blue;
+	border-radius: 20px;
+	overflow: hidden;
+}
+
+.box1::before {
+	content: '';
+	z-index: 1;
+	position: absolute;
+	top: -50%;
+	left: -50%;
+	width: 380px;
+	height: 420px;
+	transform-origin: bottom right;
+	background: linear-gradient(0deg, transparent,  #FFC107,  #FFC107);
+	animation: animate 6s linear infinite;
+}
+
+.box1::after {
+	content: '';
+	z-index: 1;
+	position: absolute;
+	top: -50%;
+	left: -50%;
+	width: 380px;
+	height: 420px;
+	transform-origin: bottom right;
+	background: linear-gradient(0deg, transparent,  #FFC107, #FFC107);
+	animation: animate 6s linear infinite;
+	animation-delay: -3s;
+}
+
+@keyframes animate {
+	0% {
+		transform: rotate(0deg);
+	}
+
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+form {
+	position: absolute;
+	inset: 2px;
+	background:#F8F9FA;
+	padding: 50px 40px;
+	border-radius: 20px;
+	z-index: 2;
+	display: flex;
+	flex-direction: column;
+}
+
+.sign_in{
+	color: #0056B3;
+	font-weight: 500;
+	text-align: center;
+	letter-spacing: 0.1em;
+}
+
+h2 {
+	color: #0056B3;
+	font-weight: 500;
+	text-align: center;
+	letter-spacing: 0.1em;
+}
+
+.inputBox {
+	position: relative;
+	width: 300px;
+	margin-top: 35px;
+}
+
+.inputBox input {
+	position: relative;
+	width: 100%;
+	padding: 20px 10px 10px;
+	background: transparent;
+	outline: none;
+	box-shadow: none;
+	border: none;
+	color: #23242a;
+	font-size: 1em;
+	letter-spacing: 0.05em;
+	transition: 0.5s;
+	z-index: 10;
+	margin-top: 10px;
+}
+
+.inputBox span {
+	position: absolute;
+	left: 0;
+	padding: 20px 0px 10px;
+	pointer-events: none;
+	font-size: 1em;
+	color: #8f8f8f;
+	letter-spacing: 0.05em;
+	transition: 0.5s;
+}
+.register_label{
+	color: #0056B3;
+}
+
+.inputBox input:valid~span,
+.inputBox input:focus~span {
+	color: #0056B3;
+	transform: translateX(0px) translateY(-34px);
+	font-size: 0.85em;
+}
+
+.inputBox i {
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	height: 2px;
+	background: #d2d0d0;
+	border-radius: 4px;
+	overflow: hidden;
+	transition: 0.5s;
+	pointer-events: none;
+	z-index: 9;
+}
+
+.inputBox input:valid~i,
+.inputBox input:focus~i {
+	height: 44px;
+}
+
+.links {
+	display: flex;
+	justify-content: space-between;
+}
+
+.links a {
+	margin: 10px 0;
+	font-size: 0.75em;
+	color:#0056B3 ;
+	text-decoration: beige;
+}
+
+.links a:hover,
+.links a:nth-child(2) {
+	color: #FFC107;
+}
+
+input[type="submit"] {
+	border: none;
+	outline: none;
+	padding: 11px 25px;
+	background:  #FFC107;
+	cursor: pointer;
+	border-radius: 4px;
+	font-weight: 600;
+	width: 100px;
+	margin-top: 10px;
+}
+
+input[type="submit"]:active {
+	opacity: 0.8;
+}
+
+input[type="submit"]:hover {
+	color: white;
+	background-color: #0056B3;
+}
+
+.particle-container {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+   
+  }
+  
+  
+  .form-container {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 2;
+	text-align: center;
+  }
+ 
+  
+  .particle {
+	position: absolute;
+	width: 10px;
+	height: 10px;
+	background-color: #3498db; /* Change color as needed */
+	border-radius: 50%;
+	z-index: 1
+  }
+  .triangle {
+	width: 0;
+	height: 0;
+	border-left: 5px solid transparent;
+	border-right: 5px solid transparent;
+	border-bottom: 10px solid #ff0000; /* Neon red */
+  }
+  
+  .star {
+	position: relative;
+	display: inline-block;
+	width: 0;
+	height: 0;
+	margin-left: 20px;
+	margin-right: 20px;
+  }
+  
+  .star::after {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: -20px;
+	width: 0;
+	height: 0;
+	border-right: 20px solid transparent;
+	border-bottom: 35px solid #f4e50e; /* Neon yellow */
+	border-left: 20px solid transparent;
+	transform: rotate(35deg);
+  }
+  
+  .star::before {
+	content: '';
+	position: absolute;
+	top: 10px;
+	left: -15px;
+	width: 0;
+	height: 0;
+	border-right: 20px solid transparent;
+	border-bottom: 35px solid #f4e50e; /* Neon yellow */
+	border-left: 20px solid transparent;
+	transform: rotate(-35deg);
+  }
+
+  @keyframes explode {
+	0% {
+	  transform: scale(1);
+	  opacity: 1;
+	}
+	100% {
+	  transform: scale(2);
+	  opacity: 0;
+	}
+  }
+
+
+  .message_box{
+	box-shadow: 0 0 10px #FFC107;
+
+  }
+  

@@ -1,0 +1,185 @@
+
+
+
+
+
+ {% extends 'emain.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+    .card-body {
+        border: 1px solid #ced4da; /* Border color */
+        border-radius: 5px; /* Rounded corners */
+        padding: 30px; /* Padding inside the border */
+         /* Left margin to separate from user name and time */
+        overflow-y: auto; /* Add vertical scroll when content exceeds height */
+        max-height: 500px; /* Set maximum height for scrollable area */
+    }
+    .message-body{
+
+        border: 1px solid #ced4da; /* Border color */
+        border-radius: 5px; /* Rounded corners */
+        padding: 10px;
+        max-height: 300px;
+        margin-left: 50px;
+
+    }
+    .message-form {
+        margin-top: 20px;
+        display: flex; /* Use flexbox layout */
+        align-items: center; /* Center align items vertically */
+    }
+
+    .message-input {
+        flex: 1; /* Take remaining space */
+        width: calc(100% - 80px); /* Adjust for button width */
+        padding: 10px;
+        border: 1px solid #ced4da;
+        border-radius: 5px;
+        outline: none;
+        font-size: 16px;
+        
+        margin: 10px;
+    }
+
+    .message-input:focus {
+        border-color: #6cb2eb; /* Highlight border color on focus */
+    }
+
+    .message-submit {
+        padding: 10px 20px;
+        
+        border: none;
+        border-radius: 5px;
+        background-color: #007bff; /* Blue color for button */
+        color: #fff; /* White text color */
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s;
+    }
+
+    .message-submit:hover {
+        background-color: #0056b3; /* Darker blue color on hover */
+    }
+    .info{
+      background-color: #ACE2E1;
+    }
+    .tables{
+      background-color: #008DDA;
+    }
+    .custom-table {
+              background-color: #008DDA;
+              border-collapse: collapse;
+              width: 100%;
+              text-align: center;
+          }
+          
+          .custom-table th,
+          .custom-table td {
+              border: 1px solid #ddd;
+              padding: 8px;
+              text-align: left;
+          }
+          
+          .custom-table th {
+              background-color: #008DDA;
+              color: #fff;
+          }
+          .overview{
+            text-align: center;
+          }
+          .contact{
+            color: white;
+            text-decoration: none;
+          }
+</style>
+
+<div class="container">
+    <h1 id="testing_chat" class="mt-5 mb-4">Chat</h1>
+
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="card">
+                <div class="card-body" id="message-container">
+                    {% for message in room_messages %}
+                        <div class="message mb-4">
+                            <div class="message-header">
+                                <img src="{{ message.user.avatar.url }}" class="avatar mr-2 rounded-circle" alt="User Avatar" style="width: 40px; height: 40px;">
+                                <span class="font-weight-bold" style="font-size: 16px;">{{ message.user.name }}</span>
+                                <span class="text-muted ml-2 small">{{ message.created|timesince }} ago</span>
+                            </div>
+                            <div class="message-body">
+                                <p class="mb-0" style="font-size: 16px;">{{ message.body }}</p>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    
+                </div>
+                <form action="" method="POST" class="message-form">
+                    {% csrf_token %}
+                    <input name="body" class="message-input" placeholder="Write your message here..." required />
+                    <button type="submit" class="message-submit">Send</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <table class="custom-table">
+                <thead>
+                    <tr >
+                        <th style="text-align: center;" colspan="2">Candidate Overview</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="info">
+                        <td>Name</td>
+                        <td>{{ room.user.name }}</td>
+                    </tr>
+                    <tr class="info">
+                        <td>Email:</td>
+                        <td>{{ room.user.email }}</td>
+                    </tr>
+                    <tr class="info">
+                        <td>Phone:</td>
+                        <td>{{ room.user.phone }}</td>
+                    </tr>
+                    <tr class="info">
+                        <td>Skills:</td>
+                        <td>{{ room.user.skills }}</td>
+                    </tr>
+                    <tr class="info">
+                        <td>Experience:</td>
+                        <td>{{ room.user.experience }}</td>
+                    </tr>
+                   
+                    
+                </tbody>
+            </table>
+         
+        </div>
+
+
+
+
+    </div>
+</div> 
+{% endblock %}
+
+
+   <!-- <script>
+    document.addEventListener("DOMContentLoaded", function() {
+    var messageContainer = document.getElementById('message-container');
+    messageContainer.scrollTop = messageContainer.scrollHeight;
+});
+
+const testing = docuent.getElementById('testing_chat')
+testing.addEventListener('click',function(){
+    console.log("clicked")
+})
+   </script>
+    -->
+
+    <!-- <script src="{% static 'js/index.js' %}"></script> -->
+

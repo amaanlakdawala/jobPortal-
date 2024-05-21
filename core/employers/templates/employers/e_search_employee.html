@@ -1,0 +1,92 @@
+{% extends 'emain.html' %}
+{% block content %}
+
+
+<form action="" method = "GET">
+    <strong> <i class="bi bi-search search_icon"></i> </strong><input class="search_field" name="q" placeholder="Enter Skills ">       
+</form>
+
+
+
+<div class="container">
+<div class="row">
+    <div class="col-md-9">
+        {% include 'employers/candidates_list.html' %}
+        </div>
+<div class="col-md-3 card shadow rounded-lg main" style="height: fit-content;">
+    <form  method="POST">
+        {% csrf_token %}
+    
+    
+    <div class="job-category-listing mb-50 card-body main">
+        
+        <div class="single-listing">
+           <div class="small-section-tittle2">
+                 <h4 class="heading">Location</h4>
+                 <hr>
+           </div>
+            
+            <div class="select-job-items2">
+                <select name="select">
+                    <option name="Anywhere" value="Anywhere">Anywhere</option>
+                    <option name="location" value="Mumbai">Mumbai</option>
+                    <option  name="location" value="Delhi">Delhi</option>
+                    <option name="location" value="Chennai">Chennai</option>
+                    <option name="location" value="Bengaluru">Bengaluru</option>
+                </select>
+                <hr>
+            </div>
+           
+            <div class="select-Categories pt-80 pb-50">
+                <div class="small-section-tittle2">
+                    <h4 class="heading">Experience</h4>
+                    <hr>
+                </div>
+                <label class="container">Fresher
+                    <input name="experience" value="Fresher" type="checkbox" >
+                    <span class="checkmark"></span>
+                </label>
+                <hr>
+                <label class="container">1 Years
+                    <input type="checkbox" name="experience" value="1 Years"  checked="checked">
+                    <span class="checkmark"></span>
+                </label>
+                <hr>
+                <label class="container">2 Years
+                    <input type="checkbox" name="experience" value="2 Years">
+                    <span class="checkmark"></span>
+                </label>
+                <hr>
+                <label class="container">3 Years
+                    <input type="checkbox" name="experience" value="3 Years">
+                    <span class="checkmark"></span>
+                </label>
+                <hr>
+                <label class="container">4 Years
+                    <input type="checkbox" name="experience" value="4 Years">
+                    <span class="checkmark"></span>
+                </label>
+                <hr>
+                <label class="container">5 Years and Above
+                    <input type="checkbox" name="experience" value="5 Years and Above">
+                    <span class="checkmark"></span>
+                </label>
+                <hr>
+            </div>
+           
+        </div>
+        
+        <div class="single-listing">
+           
+            
+            <input type="submit" value="Search" name="submit-button" class="btn btn-primary">
+        </div>
+        </form>
+</div>
+
+
+</div>
+</div>
+
+
+{% endblock %}

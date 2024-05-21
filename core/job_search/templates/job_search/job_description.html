@@ -1,0 +1,139 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+<style>
+  .info{
+    background-color: white;
+  }
+  .tables{
+    background-color: #0056B3;
+  }
+  .custom-table {
+            background-color: #0056B3;
+            border-collapse: collapse;
+            width: 100%;
+            text-align: center;
+        }
+        
+        .custom-table th,
+        .custom-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        
+        .custom-table th {
+            background-color: #0056B3;
+            color: #fff;
+        }
+        .overview{
+          text-align: center;
+        }
+        
+       
+</style>
+
+
+    <div class="col-md-9 ">
+      <div class="card mb-3 p-3 info" style="max-width: 540px;">
+        <div class="row g-0 info">
+          <div class="col-md-4">
+            <img src="{{job.organization.avatar.url}}" class="img-fluid rounded-start info" alt="OOPS">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body info">
+             
+              <ul class="list-group list-group-flush">
+                <li  class="list-group-item info"><h5 class="card-title"><a href="{% url 'job_description' job.id %}">{{job.role}}</a></h5></li>
+                <li class="list-group-item info"><i class="bi bi-buildings-fill"></i>   {{job.organization}}</li>
+                <li class="list-group-item info"><i class="bi bi-geo-alt-fill"></i>    {{job.location}}</li>
+                <li class="list-group-item info"><i class="bi bi-currency-rupee"></i>   {{job.salary}}</li>
+              </ul>
+            </div>
+        </div>
+      </div>
+    </div>
+    
+    
+    <div>
+        <h3>About Company</h3>
+        <p>{{job.organization.about}}</p>
+    </div>
+
+    <div>
+      <h3>Work Culture</h3>
+      <div  class="embed-responsive embed-responsive-16by9">
+        <video controls class="embed-responsive-item"  style="max-width: 50%; max-height: 50%;">
+            <source src="{{job.organization.video.url}}" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+    </div>
+    
+    
+    
+    <div>
+        <h3>Experience</h3>
+        <p>{{job.experience}}</p>
+    </div>
+    
+    
+    <div>
+        <h3>Education</h3>
+        <p>{{job.education}}</p>
+    </div>
+    </div>
+    <div class="col-md-3 ">
+    
+      <table class="custom-table">
+        <thead>
+            <tr >
+                <th style="text-align: center;" colspan="2">Job Overview</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="info">
+                <td>Location:</td>
+                <td>{{ job.location }}</td>
+            </tr>
+            <tr class="info">
+                <td>Vacancy:</td>
+                <td>{{ job.vacancy }}</td>
+            </tr>
+            <tr class="info">
+                <td>Job Type:</td>
+                <td>{{ job.job_type }}</td>
+            </tr>
+            <tr class="info">
+                <td>Salary:</td>
+                <td>{{ job.salary }}</td>
+            </tr>
+            <tr class="info">
+                <td>Application End Date:</td>
+                <td>{{ job.application_date }}</td>
+            </tr>
+            <tr class="info">
+                {% if request.user.is_authenticated %}
+                <form action="" method="POST" id="submit-form">
+                    {% csrf_token %}
+                    <td colspan="2"><button type="submit" id="applyButton" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-primary">Apply</button></td>
+                </form>
+                {% endif %}
+            </tr>
+        </tbody>
+    </table>
+    
+
+
+
+
+
+
+
+ 
+  
+
+
+  
+{% endblock %}
