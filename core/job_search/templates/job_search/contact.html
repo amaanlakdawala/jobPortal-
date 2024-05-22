@@ -4,6 +4,253 @@
 {% block content %}
 {% load static %}
 <style>
+  .contact-section {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 2rem;
+      background-color: #343A40;
+    }
+
+    .contact-image {
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      border: 1px solid #FFC107;
+    }
+
+    .contact-form {
+      
+      padding: 1.5rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      background-color: #b5b7b9;
+    }
+
+    .contact-form textarea {
+      width: 100%;
+      height: 150px;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      resize: none;
+    }
+
+    .contact-form button {
+      margin-top: 10px;
+    }
+
+  .faq-item {
+    margin: 2rem 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 1rem;
+    background-color: #b5b7b9;
+    overflow: hidden;
+    transition: height 0.3s ease;
+  }
+
+  .faq-item.expanded {
+    height: auto;
+  }
+
+  .question-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    color: #343A40;
+  }
+
+  .answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding-top 0.3s ease;
+    padding-top: 0;
+  }
+
+  .answer.expanded {
+    max-height: 1000px;
+    
+  }
+
+  .arrow {
+    font-size: 1.25rem;
+    cursor: pointer;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: auto;
+   
+  }
+  @keyframes flashAndZoom {
+    0% {
+        color: #0056B3; /* Initial color */
+        transform: scale(0.8); /* Initial size */
+    }
+    50% {
+        color: #FFC107; /* Midway color */
+        transform: scale(1); /* Zoomed in size */
+    }
+    100% {
+        color: #0056B3; /* Final color */
+        transform: scale(0.8); /* Back to initial size */
+    }
+}
+
+.flashing-header {
+    animation: flashAndZoom 1s infinite; /* Animation lasting 1 second, repeating infinitely */
+    display: inline-block; /* To ensure transform works correctly */
+}
+.latest_jobs{
+    text-align: center;
+
+}
+</style>
+{% if messages %}
+{% for message in messages %}
+
+    
+<div class="alert alert-primary d-flex align-items-center justify-content-between mt-2 " role="alert">
+  <div class="d-flex align-items-center">
+    
+    
+      <div>
+          {{ message }}
+      </div>
+  </div>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+
+
+
+{% endfor %}
+{% endif %}
+
+<div class="container ">
+  <div class="row contact-section">
+    <div class=" latest_jobs">
+      <h1 class="mt-4 mb-4 flashing-header">Enter Your Query Here</h1>
+      </div>
+  
+   
+    <div class="col-md-5 mt-5 mb-5 ms-2">
+      <img class="contact-image" src="{% static 'images/call-center4.png' %}" alt="Contact Image">
+    </div>
+  
+
+ 
+
+  <div class="col-md-6 contact-form me-4">
+      
+    <form id="myForm" action="" method="POST">
+      {% csrf_token %}
+      <h3 class="mb-4">Enter Your Query Here</h3>
+      <textarea class="form-control mb-3" name="query" id="query" cols="30" rows="10" placeholder="Enter your query here"></textarea>
+      <button class="btn btn-primary" type="submit">Submit</button>
+      
+    </form>
+  </div>
+  
+
+
+
+   
+  </div>
+  <!-- <div class="row">
+    <div class="col-md-5">
+      <img class="contact" src="{% static 'images/calling.jpg' %}" alt="Contact Image">
+    </div>
+
+    <div class="col-md-6 ml-md-auto contactform">
+      <form action="" method="POST">
+        {% csrf_token %}
+        <h3 class="mb-4">Enter Your Query Here</h3>
+        <textarea class="form-control mb-3" name="query" id="query" cols="30" rows="10"></textarea>
+        <button class="btn btn-primary" type="submit">Submit</button>
+      </form>
+    </div>
+  </div> -->
+  
+  <hr class="mt-5">
+  <div class=" latest_jobs">
+    <h1 id="faq-header"  class="flashing-header" >Frequently Asked Questions</h1>
+  </div>
+  
+  
+  <div class="faq-item">
+    <div class="question-container" onclick="toggleAnswer(this)">
+      <div class="question">Question 1: Can I apply for multiple jobs simultaneously on Talent Trove?</div>
+      <i class="bi bi-chevron-down arrow"></i>
+    </div>
+    
+    <div class="answer">Yes, absolutely! Talent Trove allows you to apply for multiple jobs simultaneously.
+       Simply browse through the available job listings, click on the ones that interest you,
+        and hit the "Apply" button for each job you wish to apply to.</div>
+  </div>
+
+
+  <div class="faq-item">
+    <div class="question-container" onclick="toggleAnswer(this)">
+      <div class="question">Question 2: How can I edit my profile information on Talent Trove?</div>
+      <i class="bi bi-chevron-down arrow"></i>
+    </div>
+    <div class="answer">Editing your profile information on Talent Trove is quick and easy. 
+      After logging in to your account, navigate to the "Profile" section. Here, you can update
+       details such as your contact information, work experience, skills, and education. 
+       Don't forget to save your changes!</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="question-container" onclick="toggleAnswer(this)">
+      <div class="question">Question 3: How does Talent Trove protect my personal information?</div>
+      <i class="bi bi-chevron-down arrow"></i>
+    </div>
+    <div class="answer">At Talent Trove, we take the security and privacy of your personal information seriously.
+       We use industry-standard encryption methods to safeguard your data. Your information is only shared with
+        potential employers when you apply for a job, and we never sell or distribute your data to third parties
+        . Additionally, you have full control over your privacy settings
+       and can choose what information is visible to others on your profile.</div>
+  </div>
+</div>
+
+<script>
+  function toggleAnswer(element) {
+    const answer = element.nextElementSibling;
+    const arrow = element.querySelector('.arrow');
+
+    if (answer.style.height && answer.style.height !== '0px') {
+      answer.style.height = '0';
+      answer.classList.remove('expanded');
+      arrow.classList.remove('bi-chevron-up');
+      arrow.classList.add('bi-chevron-down');
+    } else {
+      answer.style.height = answer.scrollHeight + 'px';
+      answer.classList.add('expanded');
+      arrow.classList.remove('bi-chevron-down');
+      arrow.classList.add('bi-chevron-up');
+    }
+  }
+  
+
+
+  
+
+  
+
+</script>
+
+
+
+
+
+
+
+<!-- <style>
     
          .contact{
             width: 90%;
@@ -36,16 +283,7 @@
 
    <form class="ms-5" action="" method="POST">
     {% csrf_token %}
-    <!-- {% for field in form %}
-    <div class="mb-3 ms-5">
-        <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
-       
-        <input type="{{ field.field.widget.input_type }}" name="{{ field.name }}"  class="form-control custom-input" id="{{ field.id_for_label }}">
-       
-       
-    </div>
-    {% endfor %} -->
-    <!-- <label class="form-label" for="">Enter Your Query</label> -->
+   
     <h3 class="mb-4">Enter Your Query Here</h3>
     <textarea class="form-control mb-3" name="" id="" cols="100" rows="10"></textarea>
     <button class="btn btn-primary ms-5" type="submit">Submit</button>
@@ -76,11 +314,12 @@
   <div class="faq-item">
     <div class="question">Question 3: Where does it come from?</div>
     <div class="answer">Contrary to popular belief, Lorem Ipsum is not simply random text.</div>
-  </div>
+  </div> -->
 
 
 
 {% endblock %}
-{% block extra_js %}
-<script type="text/javascript" src="{% static 'js/index.js' %}"></script>
-{% endblock %}
+
+
+
+

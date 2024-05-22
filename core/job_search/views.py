@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from . models import User,JobApplication,Jobs,JobType,Roles,Room,Message
+from . models import User,JobApplication,Jobs,JobType,Roles,Room,Message,Complaint
 from django.http import HttpResponse
 from django.contrib import messages
 from .forms import UserForm,UserRegistrationForm,ComplaintUser
@@ -205,34 +205,59 @@ def register(request):
             messages.error(request,"Some error occurred")
     return render(request,'job_search/register.html',context)
 
-
 def loginPage(request):
-   
-
-    if request.method=='POST':
+    if request.method == 'POST':
         email = request.POST.get('email')
         password = request.POST.get('password')
         try:
             user = User.objects.get(email=email)
-        except:
-            messages.error(request,'User not found')
-        print(" authenticate")
-        user = authenticate(request,email=email,password=password)
-        print("in authenticate")
-        if user is not None and user.is_employer:
-            print("authenticated")
-            login(request,user)
-            print("logges in")
-            return redirect('ehome')
-        elif user is not None and  user.is_employee:
-            
-            login(request,user)
-            return redirect('home')
-
+        except User.DoesNotExist:
+            messages.error(request, 'User not found')
+            return render(request, 'job_search/login.html')
+        
+        user = authenticate(request, email=email, password=password)
+        if user is not None:
+            if user.is_employer:
+                login(request, user)
+                return redirect('ehome')
+            elif user.is_employee:
+                login(request, user)
+                return redirect('home')
         else:
-            messages.error(request,'Email or Password is incorrect')   
-    context={}
-    return render (request,'job_search/login.html',context)
+            messages.error(request, 'Email or Password is incorrect')
+            return render(request, 'job_search/login.html')
+
+    return render(request, 'job_search/login.html')
+# def loginPage(request):
+#     error  =None
+   
+
+#     if request.method=='POST':
+#         email = request.POST.get('email')
+#         password = request.POST.get('password')
+#         try:
+#             user = User.objects.get(email=email)
+#         except:
+#             messages.error(request,'User not found')
+#             error = 'User not found'
+#         print(" authenticate")
+#         user = authenticate(request,email=email,password=password)
+#         print("in authenticate")
+#         if user is not None and user.is_employer:
+#             print("authenticated")
+#             login(request,user)
+#             print("logges in")
+#             return redirect('ehome')
+#         elif user is not None and  user.is_employee:
+            
+#             login(request,user)
+#             return redirect('home')
+
+#         else:
+#             messages.error(request,'Email or Password is incorrect') 
+#             error = 'Email or Password is incorrect'  
+#     context={}
+#     return render (request,'job_search/login.html',context,error)
 
 
 
@@ -263,6 +288,19 @@ def update_profile(request,pk):
 def contact(request):
     form = ComplaintUser()
     context={'form':form}
+    if request.method == 'POST':
+        query = request.POST.get('query')
+        print(query)
+        user = request.user
+
+        print(user)
+        c = Complaint.objects.create(user = user,body = query)
+        c.save()
+        messages.success(request, 'Your Message Have Been Delivered And it Will Be Solved Within 24 Hours')
+        return redirect('contact')
+
+       
+        
     return render (request,'job_search/contact.html',context)
 
 

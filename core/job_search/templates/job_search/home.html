@@ -6,6 +6,60 @@
 
 {% load static %}
 <style>
+.hero {
+    position: relative;
+    background-color: #343A40; /* Dark Grey */
+    color: #fff;
+    overflow: hidden;
+    display: flex;
+    justify-content: space-between; /* Space between content and image */
+    align-items: center; /* Vertically center content */
+    height: 340px; /* Adjust the height of the hero section */
+}
+
+.hero-content {
+    padding: 50px; /* Adjust padding as needed */
+    z-index: 1; /* Ensure content is above the image */
+    flex: 1;
+}
+
+.hero img {
+    height: 120%; /* Ensure the image height is 100% of the hero section */
+    width: 40%; /* Maintain aspect ratio */
+    object-fit: cover;
+    position: absolute; /* Absolutely position the image */
+    right: 0;
+    margin-bottom: 55px;
+    
+}
+
+.hero-content h1 {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+.hero-content p {
+    font-size: 18px;
+    margin-bottom: 30px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #FFC107; /* Yellow */
+    color: #343A40; /* Dark Grey */
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #D3D3D3; /* Light Grey */
+}
+
+
+
+
 .search_field{
     width: 86%;
     height:2.5rem;
@@ -16,20 +70,62 @@
             font-size: 1.6rem;
              
         }
+
+.paginator{
+    display: flex;
+    justify-content: center;
+}
+
+@keyframes flashAndZoom {
+    0% {
+        color: #0056B3; /* Initial color */
+        transform: scale(1); /* Initial size */
+    }
+    50% {
+        color: #FFC107; /* Midway color */
+        transform: scale(1.5); /* Zoomed in size */
+    }
+    100% {
+        color: #0056B3; /* Final color */
+        transform: scale(1); /* Back to initial size */
+    }
+}
+
+.flashing-header {
+    animation: flashAndZoom 1s infinite; /* Animation lasting 1 second, repeating infinitely */
+    display: inline-block; /* To ensure transform works correctly */
+}
+.latest_jobs{
+    text-align: center;
+
+}
+
    
 </style>
 
+<div class="hero">
+    <div class="hero-content">
+        <h1>Discover Your Next Career Move</h1>
+        <p>Explore thousands of opportunities tailored just for you</p>
+        <a href="{% url 'job_listing'%}" class="btn">Start Exploring</a>
+    </div>
+    <img src="{% static 'images/hero_withoutback.png' %}" alt="Hero Image" class="hero-image">
+</div>
 
-    
+
+
         <div class="col-md-4 mt-3 rolesbar">
             {% include 'job_search/roles.html' %}
         </div>
         <div class="col-md-8 mt-3">
+            <div class="latest_jobs">
+                <h1 class="mt-4 mb-4 flashing-header">Latest Jobs</h1>
+                </div>
             <form action="" method = "GET">
                 <strong> <i class="bi bi-search search_icon"></i> </strong><input class="search_field" name="q" placeholder="Search for Roles ">       
             </form>
             {% include 'job_search/jobs.html' %}
-            <nav aria-label="Page navigation example">
+            <nav aria-label="Page navigation example" class="paginator">
                 <ul class="pagination">
                     {% if finaljobs.has_previous %}
                   <li class="page-item"><a class="page-link" href="/?page={{finaljobs.previous_page_number}}">Previous</a></li>

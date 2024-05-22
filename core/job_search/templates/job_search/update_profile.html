@@ -1,15 +1,27 @@
 {% extends 'main.html' %}
 
 {% block content %}
-<div class="col-md-5 mx-auto p-3 shadow">
+<style>
+  .label{
+    color: #0056B3;
+  }
+  .update_form{
+    border: 1.5px solid #FFC107;
+    box-shadow: 0 10px 20px rgba(36, 95, 221, 0.5);
+    border-radius: 5px;
+  }
+  
+
+</style>
+<div class="mt-2 col-md-5 mx-auto p-3  update_form">
     
     <form method="POST" enctype="multipart/form-data" class="mx-auto">
         {% csrf_token %}
-        <h1 class="text-center mb-4">Update Profile</h1>
+        <h1 class="text-center mb-4 label">Update Profile</h1>
         
         {% for field in form %}
         <div class="mb-3">
-            <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
+            <label for="{{ field.id_for_label }}" class="form-label label">{{ field.label }}</label>
             {% if field.field.widget.input_type == 'textarea' %}
             <textarea name="{{ field.name }}" class="form-control custom-textarea" id="{{ field.id_for_label }}">{{ field.value }}</textarea>
             {% else %}

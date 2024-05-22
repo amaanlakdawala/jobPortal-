@@ -160,6 +160,17 @@ class Message(models.Model):
 
 
     
+class Complaint (models.Model):
+    user=models.ForeignKey(User, on_delete=models.CASCADE)
+    body=models.TextField()
+    created=models.DateTimeField(auto_now_add=True)
+     
+    class Meta:
+        ordering=['created']
+
+    def __str__(self):
+        return f"Complaint from {self.user} is  {self.body [0:50]}"
+
 
         
 

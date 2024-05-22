@@ -18,7 +18,7 @@
 .card-body {
     border: 1px solid #ced4da; /* Border color */
     border-radius: 5px; /* Rounded corners */
-    padding: 30px; /* Padding inside the border */
+     padding: 30px;  
     overflow-y: auto; /* Add vertical scroll when content exceeds height */
     max-height: 500px; /* Set maximum height for scrollable area */
 }
@@ -38,9 +38,11 @@
 }
 
 .message-form {
-    margin-top: 20px;
+    /* margin-top: 20px; */
+    margin-bottom: 5px;
     display: flex; /* Use flexbox layout */
     align-items: center; /* Center align items vertically */
+    background-color: #d6d3d3;
 }
 
 .message-input {
@@ -84,7 +86,11 @@
             border-collapse: collapse;
             width: 100%;
             text-align: center;
+            transition: transform 0.6s ease-in-out;
         }
+        .custom-table:hover {
+    transform: scale(1.1); /* Zoom in effect on hover */
+}
         
         .custom-table th,
         .custom-table td {
@@ -104,14 +110,49 @@
             color: white;
             text-decoration: none;
           }
+          @keyframes flashAndZoom {
+    0% {
+        color: #0056B3; /* Initial color */
+        transform: scale(1); /* Initial size */
+    }
+    50% {
+        color: #FFC107; /* Midway color */
+        transform: scale(1.5); /* Zoomed in size */
+    }
+    100% {
+        color: #0056B3; /* Final color */
+        transform: scale(1); /* Back to initial size */
+    }
+}
+
+.flashing-header {
+    animation: flashAndZoom 1s infinite; /* Animation lasting 1 second, repeating infinitely */
+    display: inline-block; /* To ensure transform works correctly */
+}
+.latest_jobs{
+    text-align: center;
+
+}
+
+
+.full_filter{
+    background-color: #d6d3d3;
+        height: fit-content;
+        border: 2px solid #FFC107;
+        box-shadow: 0 10px 10px rgba(36, 95, 221, 0.5);
+       
+    }
 </style>
 
 <div class="container">
-    <h1 id="testing_chat" class="mt-5 mb-4">Chat</h1>
+    <div class="latest_jobs">
+        <h1 class="mt-4 mb-4 flashing-header">Chat</h1>
+        </div>
+    
 
     <div class="row">
         <div class="col-lg-8">
-            <div class="card">
+            <div class="card full_filter">
                 <div class="card-body chat_background" id="message-container">
                     {% for message in room_messages %}
                         <div class="message mb-4">
@@ -125,11 +166,13 @@
                             </div>
                         </div>
                     {% endfor %}
+                    
                 </div>
+                <hr>
                 <form action="" method="POST" class="message-form">
                     {% csrf_token %}
                     <input name="body" class="message-input" placeholder="Write your message here..." required />
-                    <button type="submit" class="message-submit">Send</button>
+                    <button type="submit" class="me-2 message-submit">Send</button>
                 </form>
             </div>
             

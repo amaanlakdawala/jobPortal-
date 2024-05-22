@@ -5,10 +5,82 @@
 
   
 {% block content %}
-<h1>messages</h1>
+<style>
+ .custom-card {
+    max-width: 60%;
+    margin: 0 auto;
+    border: 2px solid #FFC107; /* Hot pink border color */
+    border-radius: 15px; /* Rounded corners */
+    box-shadow: 0 0 10px rgba(255, 105, 180, 0.5); /* Pink shadow */
+    transition: transform 0.3s ease-in-out;
+    border: 2px solid #FFC107;
+        box-shadow: 0 10px 10px rgba(36, 95, 221, 0.5);
+}
+
+.custom-card:hover {
+    transform: scale(1.05);
+     /* Slightly enlarges the card on hover */
+}
+  @keyframes flashAndZoom {
+    0% {
+        color: #0056B3; /* Initial color */
+        transform: scale(1); /* Initial size */
+    }
+    50% {
+        color: #FFC107; /* Midway color */
+        transform: scale(1.5); /* Zoomed in size */
+    }
+    100% {
+        color: #0056B3; /* Final color */
+        transform: scale(1); /* Back to initial size */
+    }
+}
+
+.flashing-header {
+    animation: flashAndZoom 1s infinite; /* Animation lasting 1 second, repeating infinitely */
+    display: inline-block; /* To ensure transform works correctly */
+}
+.latest_jobs{
+    text-align: center;
+
+}
+</style>
+
+<div class="latest_jobs">
+  <h1 class="mt-4 mb-4 flashing-header">Messages</h1>
+  </div>
+
 {% for room in rooms %}
 
-<div class="card mt-3 mb-3 p-4 shadow jobs-single " style="max-width:90%">
+<div class="card mt-3 mb-3 p-4  jobs-single custom-card">
+  <div class="row">
+      <div class="col-md-4 info message_card">
+          <img src="{{room.employer.avatar.url}}" class="img-fluid rounded-start info" alt="OOPS">
+      </div>
+      <div class="col-md-8">
+          <div class="card-body info">
+              <ul class="list-group list-group-flush info">
+                  <li class="list-group-item info">
+                      <a href="{% url 'uchat' room.id %}">
+                          <h5>{{room.employer.name}}</h5>
+                      </a>
+                  </li>
+                  <li class="list-group-item info">
+                      <strong>Organization: </strong>{{room.employer.organization}}
+                  </li>
+                  <li class="list-group-item info">
+                      <strong>Email: </strong>{{room.employer.email}}
+                  </li>
+                  <li class="list-group-item info">
+                      <strong>Location: </strong>{{room.employer.location}}
+                  </li>
+              </ul>
+          </div>
+      </div>
+  </div>
+</div>
+
+<!-- <div class="card mt-3 mb-3 p-4 shadow jobs-single " style="max-width:90%">
     <div class="row ">
       <div class="col-md-4 info">
         <img src="{{room.employer.avatar.url}}" class="img-fluid rounded-start info" alt="OOPS">
@@ -26,12 +98,11 @@
          
             
           </ul>
-          <!-- <p class="card-text">{{job.job_type}}</p> -->
-          <!-- <p class="card-text"><small class="text-body-secondary">{{job.created | timesince }}  ago</small></p> -->
+          
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 
   {% endfor %}
 

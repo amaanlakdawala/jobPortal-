@@ -6,23 +6,61 @@
    
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        .profile-image {
-            border-radius: 50%; /* Makes the image round */
-            width: 35%; /* Adjust the width and height as needed */
-            height: 3rem;
-            object-fit: cover; /* Ensures the image covers the entire circle */
-        }
-        .head{
-            background-color: #0056B3;
-            
-        }
-        .nav-text{
-            color: white;
-            margin-left: 50px;
-        }
-        .nav-text:hover{
-            color: #FFC107;
-        }
+       /* Navbar styling */
+.navbar1 {
+    background-color: #0056B3; /* Dark Blue */
+}
+
+.navbar-nav .nav-link {
+    color: #FFFFFF; /* White */
+    font-weight: 500;
+    padding: 0 15px; /* Add horizontal padding */
+    transition: color 0.3s; /* Smooth color transition */
+}
+
+.navbar-nav .nav-link:hover {
+    color: #FFC107; /* Yellow */
+}
+
+.navbar-toggler {
+    border: none;
+    color: #FFFFFF; /* White for better visibility */
+}
+
+.navbar-toggler:focus {
+    outline: none;
+}
+
+.head {
+    background-color: #0056B3;
+}
+
+.profile-image {
+    border-radius: 50%; /* Makes the image round */
+    width: 40px; /* Adjust the width as needed */
+    height: 40px; /* Adjust the height as needed */
+    margin-left: 10px; /* Add spacing between profile image and button */
+}
+
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=UTF8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba%280, 0, 0, 0.5%29' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+
+.btn-primary {
+    background-color: #FFC107; /* Yellow */
+    border-color: #FFC107; /* Yellow */
+    color: #0056B3; /* Dark Blue for contrast */
+}
+
+.btn-primary:hover {
+    background-color: #D3D3D3; /* Light Grey */
+    border-color: #D3D3D3; /* Light Grey */
+}
+
+.container-fluid {
+    padding: 0 30px; /* Adjust the padding for the container */
+}
+
       </style>
 
     <title>Document</title>
@@ -31,55 +69,48 @@
 
 
 
-
     <div class="navbar1">
-        <nav class="navbar navbar-expand-lg bg-body-tertiary head">
+        <nav class="navbar navbar-expand-lg  head">
             <div class="container-fluid head">
-                <!-- Move brand name to the right -->
-                <div class="d-flex head">
-                    <!-- Move brand name to the right -->
-
-                    <img src="{% static 'images/logo.svg' %}"  class="img-fluid" alt="Bootstrap" width="30" height="24">
+                <!-- Brand logo -->
+                <div class="navbar-brand d-flex align-items-center head">
+                    <img src="{% static 'images/logo.svg' %}" class="img-fluid" alt="Logo" width="30" height="24">
                 </div>
-               
-                <!-- Add a wrapper div for the navbar-toggler and navbar-collapse -->
-                <div class="d-flex head">
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <!-- Add a wrapper div for the navbar-nav -->
-                    <div class="collapse navbar-collapse head" id="navbarNavAltMarkup">
-                        <div class="navbar-nav mx-auto head"> <!-- Use mx-auto to center items -->
-                            <a class="nav-link nav-text" aria-current="page" href="{% url 'home' %}">Home</a>
-                            <a class="nav-link nav-text" href="{% url 'job_listing' %}">Search Jobs</a>
-                            <a class="nav-link nav-text" href="{% url 'about_us' %}">About Us</a>
-
-                            <a class="nav-link nav-text" href="{% url 'contact' %}">Contact Us</a>
-                            <a class="nav-link nav-text" href="{% url 'umessage' %}">Message</a>
-                            
-                        </div>
+                
+                <!-- Navbar toggler for mobile view -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+    
+                <!-- Navbar links -->
+                <div class="collapse navbar-collapse head" id="navbarNavAltMarkup">
+                    <div class="navbar-nav mx-auto head"> <!-- Center items -->
+                        <a class="nav-link nav-text" aria-current="page" href="{% url 'home' %}">Home</a>
+                        <a class="nav-link nav-text" href="{% url 'job_listing' %}">Search Jobs</a>
+                        <a class="nav-link nav-text" href="{% url 'about_us' %}">About Us</a>
+                        <a class="nav-link nav-text" href="{% url 'contact' %}">Contact Us</a>
+                        <a class="nav-link nav-text" href="{% url 'umessage' %}">Message</a>
+                    </div>
+                    
+                    <!-- Authentication links -->
+                    <div class="navbar-nav ms-auto head"> <!-- Move items to the right -->
+                        {% if request.user.is_authenticated %}
+                            <a href="{% url 'loginPage' %}" class="btn btn-primary me-2">Logout</a>
+                            <a href="{% url 'profile' %}">
+                                <img src="{{ request.user.avatar.url }}" alt="Profile Image" class="profile-image ms-1">
+                            </a>
+                        {% else %}
+                            <a href="{% url 'loginPage' %}" class="btn btn-primary me-2">Login</a>
+                            <a href="{% url 'loginPage' %}">
+                                <img src="/static/images/avatar.svg" alt="Profile Image" class="profile-image ms-1">
+                            </a>
+                        {% endif %}
                     </div>
                 </div>
-                <!-- Move buttons to the left -->
-                {% if request.user.is_authenticated %}
-                <div class="ms-auto">
-                    <a href="{% url 'loginPage' %}" class="btn btn-primary">Logout</a>
-                    <a href="{% url 'profile' %}"><img  src="{{ request.user.avatar.url }}" alt="Profile Image" class="profile-image ms-1"></a>
-               
-                </div>
-
-                {% else %}
-                <div class="ms-auto">
-                    <a href="{% url 'loginPage' %}" class="btn btn-primary">Login</a>
-                    <a href="{% url 'loginPage' %}"><img src="/static/images/avatar.svg" alt="Profile Image" class="profile-image">
-                    </a>
-                </div>
-
             </div>
-            {% endif %}
-           
         </nav>
     </div>
+    
 
 </body>
 </html>

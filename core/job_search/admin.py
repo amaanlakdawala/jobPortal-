@@ -1,5 +1,5 @@
 from django.contrib import admin
-from. models import User,Jobs,Roles,JobType,JobApplication,Employers,Room,Message
+from. models import User,Jobs,Roles,JobType,JobApplication,Employers,Room,Message,Complaint
 
 # Register your models here.
 
@@ -11,5 +11,6 @@ admin.site.register(JobType)
 admin.site.register(JobApplication)
 admin.site.register(Room)
 admin.site.register(Message)
+admin.site.register(Complaint)
 
 

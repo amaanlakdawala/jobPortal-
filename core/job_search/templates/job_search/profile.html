@@ -1,4 +1,4 @@
-{% extends 'job_search/home.html' %}
+{% extends 'main.html' %}
 
 {% block content %}
 <style>
@@ -15,19 +15,54 @@
         color: white;
         
     }
+    @keyframes flashAndZoom {
+    0% {
+        color: #0056B3; /* Initial color */
+        transform: scale(1); /* Initial size */
+    }
+    50% {
+        color: #FFC107; /* Midway color */
+        transform: scale(1.5); /* Zoomed in size */
+    }
+    100% {
+        color: #0056B3; /* Final color */
+        transform: scale(1); /* Back to initial size */
+    }
+}
+
+.flashing-header {
+    animation: flashAndZoom 1s infinite; /* Animation lasting 1 second, repeating infinitely */
+    display: inline-block; /* To ensure transform works correctly */
+}
+.latest_jobs{
+    text-align: center;
+
+}
+.profile_img{
+    border-radius: 5px;
+}
+.profile_info {
+    border: 2px solid #FFC107;
+    box-shadow: 0 10px 10px rgba(36, 95, 221, 0.5);
+    width: 90%;/* Adjust this value as needed */
+    margin: 0 auto; /* Center the element if desired */
+}
 </style>
+<div class="latest_jobs">
+    <h1 class="mt-4 mb-4 flashing-header">This is profile</h1>
+    </div>
 
-<h1>This is profile</h1>
 
-        <div class="col-md-3 ">
+
+        <div class="col-md-3 me-2 ">
             {% include 'job_search/roles.html' %}
         </div>
         
-        <div class="col-md-6">
+        <div class="col-md-6 ms-4">
 
 
-            <div class=" card border-opacity-10 main" style="width: 35.6rem;">
-                <img src="{{request.user.avatar.url}}" class="img-fluid card-img-top mx-auto rounded-lg" style="width: 50%;" alt="">
+            <div class=" card border-opacity-10 main profile_info" >
+                <img src="{{request.user.avatar.url}}" class="mt-3 img-fluid card-img-top mx-auto rounded-lg profile_img" style="width: 50%;" alt="">
                 <div class="card-body mx-auto mt-1 main">
                   <p class="card-text mt-2 main"><strong>Name:</strong> {{request.user.name}}</p>
                   <p class="card-text mt-2 main"> <strong>Email:</strong> {{request.user.email}}</p>
@@ -50,8 +85,8 @@
         
         
         
-        <div class="col-md-3">
-            <div class="card" style="width: 18rem;">
+        <div class="col-md-2 me-5">
+            <div class="card profile_info" style="width: 18rem;">
                 <div class="card-header roles">
                     <h1 class="applied_in_company">Applied in Companies</h1>
                 </div>
@@ -81,25 +116,6 @@
 
 
 
-        
-            <!-- <div>
-               
-            
-               
-                <ul>
-                    <li>
-                       
-                       
-                       
-                    </li>
-                </ul>
-                  
-               
-               
-            
-            </div>
-        </div> -->
-        
 
     </div>
 

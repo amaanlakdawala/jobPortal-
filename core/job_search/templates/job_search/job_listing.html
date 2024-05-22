@@ -5,6 +5,7 @@
      .main{
         background-color: white;
        
+       
     }
     .heading{
         background-color: #0056B3;
@@ -14,13 +15,19 @@
     }
     .full_filter{
         height: fit-content;
+        border: 2px solid #FFC107;
+        box-shadow: 0 10px 10px rgba(36, 95, 221, 0.5);
        
     }
+    .paginator{
+    display: flex;
+    justify-content: center;
+}
 </style>
 
     <div class="col-md-9">
         {% include 'job_search/jobs.html' %}
-        <nav aria-label="Page navigation example">
+        <nav aria-label="Page navigation example" class="paginator">
             <ul class="pagination">
                 {% if finaljobs.has_previous %}
               <li class="page-item"><a class="page-link" href="/job_listing/?page={{finaljobs.previous_page_number}}">Previous</a></li>
@@ -37,12 +44,12 @@
           </nav>
     </div>
 
-    <div class="full_filter col-md-3 card shadow rounded-lg main " >
+    <div class="mt-3 full_filter col-md-3 card  rounded-lg main " >
         <form  method="POST">
             {% csrf_token %}
         
         
-        <div class=" job-category-listing mb-50 card-body main">
+        <div class="mt-1 job-category-listing mb-50 card-body main">
             <!-- single one -->
             <div class="single-listing main">
                

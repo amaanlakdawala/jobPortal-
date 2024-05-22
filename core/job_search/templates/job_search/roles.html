@@ -3,28 +3,36 @@
 {% block content %}
 
 <style>
-    .roles{
-        background-color: #0056B3;
-    }
-    .roles-list{
-        background-color: white;
-    }
-    .listofjobs{
-        color: white;
-        text-align: center;
-    }
-    .roleslink{
-        color: #FFC107;
-        text-decoration: none;
-    }
-    .role-name{
-        color: #0056B3;
-    }
+    .roles {
+    background-color: #0056B3;
+    /* max-width: 90%; */
     
+    border: 1.5px solid #FFC107;
+    box-shadow: 0 10px 15px rgba(36, 95, 221, 0.5);
+}
+
+.roles-list {
+    background-color: white;
+}
+
+.listofjobs {
+    color: white;
+    text-align: center;
+}
+
+.roleslink {
+    color: #FFC107;
+    text-decoration: none;
+}
+
+.role-name {
+    color: #0056B3;
+} 
+
 </style>
 
 
-<div class="card shadow roles" style="width: 18rem;">
+<div class="card  roles" style="width: 18rem;">
     <div class="card-header">
         <h5 class="listofjobs">List of jobs</h5>
     </div>
@@ -36,16 +44,6 @@
     </ul>
   </div>
 
-<!-- <div>
-    <h1>List of jobs are</h1>
-    
-        <h3><a href="{% url 'home' %}">All</a></h3>
-    
-    {% for role in roles %}
-    <div>
-        <h3><a href="{% url 'home'%}?q={{role.name}}"> {{role.name}}</a><span>{{role.jobs_set.all.count}}</span></h3>      
-    </div>
-    {% endfor %}
-</div> -->
+
 
 {% endblock %}

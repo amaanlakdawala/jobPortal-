@@ -57,7 +57,15 @@
     <div class="box">
 		<form autocomplete="off"  method="POST">
             {% csrf_token %}
+           
 			<h2 class="sign_in">Sign in</h2>
+         {% if messages %}
+         {% for message in messages %}
+             <div class="alert alert-danger" role="alert">
+                 {{ message }}
+             </div>
+         {% endfor %}
+     {% endif %}
 			<div class="inputBox">
 				<input   type="email" name="email" required="required">
 				<span>Email</span>
