@@ -13,7 +13,12 @@
             border-collapse: collapse;
             width: 100%;
             text-align: center;
+            transition: transform 0.6s ease-in-out;
         }
+        .custom-table:hover {
+    transform: scale(1.05); /* Zoom in effect on hover */
+}
+        
         
         .custom-table th,
         .custom-table td {
@@ -28,6 +33,13 @@
         }
         .overview{
           text-align: center;
+        }
+        .main_card{
+          border: 1.5px solid #FFC107;
+    box-shadow: 0 10px 10px rgba(36, 95, 221, 0.5);
+        }
+        .about_company{
+          color: #0056B3;
         }
         
        
@@ -55,7 +67,7 @@
 
 
     <div class="col-md-9 ">
-      <div class="card mb-3 p-3 info" style="max-width: 540px;">
+      <div class="mt-2 mb-3 card mb-3 p-3 info main_card" style="max-width: 540px;">
         <div class="row g-0 info">
           <div class="col-md-4">
             <img src="{{job.organization.avatar.url}}" class="img-fluid rounded-start info" alt="OOPS">
@@ -76,12 +88,12 @@
     
     
     <div>
-        <h3>About Company</h3>
+        <h3 class="about_company">About Company</h3>
         <p>{{job.organization.about}}</p>
     </div>
 
     <div>
-      <h3>Work Culture</h3>
+      <h3 class="about_company">Work Culture</h3>
       <div  class="embed-responsive embed-responsive-16by9">
         <video controls class="embed-responsive-item"  style="max-width: 50%; max-height: 50%;">
             <source src="{{job.organization.video.url}}" type="video/mp4">
@@ -93,19 +105,19 @@
     
     
     <div>
-        <h3>Experience</h3>
+        <h3 class="about_company">Experience</h3>
         <p>{{job.experience}}</p>
     </div>
     
     
     <div>
-        <h3>Education</h3>
+        <h3 class="about_company">Education</h3>
         <p>{{job.education}}</p>
     </div>
     </div>
     <div class="col-md-3 ">
     
-      <table class="custom-table">
+      <table class="custom-table mt-2">
         <thead>
             <tr >
                 <th style="text-align: center;" colspan="2">Job Overview</th>

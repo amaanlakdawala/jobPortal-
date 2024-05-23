@@ -100,6 +100,96 @@
 
 }
 
+
+
+
+@media (max-width: 1200px) {
+    .hero {
+        height: 300px; /* Adjust the height for smaller screens */
+    }
+
+    .hero-content h1 {
+        font-size: 32px; /* Adjust font size for smaller screens */
+    }
+
+    .hero-content p {
+        font-size: 16px; /* Adjust font size for smaller screens */
+    }
+}
+
+@media (max-width: 992px) {
+    .hero {
+        height: 280px; /* Adjust the height for smaller screens */
+    }
+
+    .hero-content {
+        padding: 40px; /* Adjust padding for smaller screens */
+    }
+
+    .hero-content h1 {
+        font-size: 28px; /* Adjust font size for smaller screens */
+    }
+
+    .hero-content p {
+        font-size: 14px; /* Adjust font size for smaller screens */
+    }
+
+    .hero img {
+        width: 35%; /* Reduce image width for medium screens */
+    }
+}
+
+@media (max-width: 768px) {
+    .hero {
+        height: auto; /* Let the content determine the height */
+        padding: 20px;
+        flex-direction: column; /* Stack items vertically for small screens */
+        align-items: flex-start; /* Align items to the start */
+    }
+
+    .hero img {
+        width: 100%; /* Full width image */
+        height: auto; /* Maintain aspect ratio */
+        margin-bottom: 20px; /* Add some margin for separation */
+    }
+
+    .hero-content {
+        padding: 20px; /* Adjust padding for smaller screens */
+        width: 100%; /* Full width content */
+    }
+
+    .hero-content h1 {
+        font-size: 24px; /* Adjust font size for smaller screens */
+    }
+
+    .hero-content p {
+        font-size: 14px; /* Adjust font size for smaller screens */
+    }
+}
+
+@media (max-width: 576px) {
+    .hero {
+        flex-direction: column; /* Stack content vertically for very small screens */
+    }
+
+    .hero-content {
+        padding: 20px; /* Adjust padding for smallest screens */
+        width: 100%; /* Full width content */
+    }
+
+    .hero img {
+        width: 100%; /* Full width image */
+        height: 200px; /* Set height to maintain layout */
+    }
+
+    .hero-content h1 {
+        font-size: 20px; /* Adjust font size for smallest screens */
+    }
+
+    .hero-content p {
+        font-size: 12px; /* Adjust font size for smallest screens */
+    }
+}
    
 </style>
 

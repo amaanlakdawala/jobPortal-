@@ -6,6 +6,7 @@
     .roles {
     background-color: #0056B3;
     /* max-width: 90%; */
+    width: 18rem;
     
     border: 1.5px solid #FFC107;
     box-shadow: 0 10px 15px rgba(36, 95, 221, 0.5);
@@ -29,10 +30,98 @@
     color: #0056B3;
 } 
 
+
+@media (max-width: 1200px) {
+    .roles {
+        margin: 15px; /* Adjust margin for medium screens */
+        padding: 15px; /* Adjust padding for medium screens */
+    }
+
+    .roles-list {
+        padding: 15px; /* Adjust padding for medium screens */
+        text-align: center;
+    }
+}
+
+@media (max-width: 992px) {
+    .roles {
+        margin: 10px; /* Adjust margin for smaller screens */
+        padding: 10px; /* Adjust padding for smaller screens */
+    }
+
+    .roles-list {
+        padding: 10px; /* Adjust padding for smaller screens */
+        text-align: center;
+    }
+
+    .listofjobs {
+        font-size: 16px; /* Adjust font size for smaller screens */
+    }
+
+    .roleslink {
+        padding: 8px; /* Adjust padding for smaller screens */
+        font-size: 16px; /* Adjust font size for smaller screens */
+    }
+
+    .role-name {
+        font-size: 18px; /* Adjust font size for smaller screens */
+    }
+}
+
+@media (max-width: 768px) {
+    .roles {
+        margin: 0 auto; /* Center container for very small screens */
+        padding: 1px; /* Adjust padding for very small screens */
+        max-width: 100%
+    }
+
+    .roles-list {
+        padding: 8px; /* Adjust padding for very small screens */
+        text-align: center;
+    }
+
+    .listofjobs {
+        font-size: 14px; /* Adjust font size for very small screens */
+    }
+
+    .roleslink {
+        padding: 6px; /* Adjust padding for very small screens */
+        font-size: 14px; /* Adjust font size for very small screens */
+    }
+
+    .role-name {
+        font-size: 16px; /* Adjust font size for very small screens */
+    }
+}
+
+@media (max-width: 576px) {
+    .roles {
+        /* Adjust margin for extra small screens */
+        padding: 0px; /* Adjust padding for extra small screens */
+    }
+
+    .roles-list {
+        padding: 5px; /* Adjust padding for extra small screens */
+    }
+
+    .listofjobs {
+        font-size: 20px; /* Adjust font size for extra small screens */
+    }
+
+    .roleslink {
+        padding: 4px; /* Adjust padding for extra small screens */
+        font-size: 16px; /* Adjust font size for extra small screens */
+    }
+
+    .role-name {
+        font-size: 18px; /* Adjust font size for extra small screens */
+    }
+}
+
 </style>
 
 
-<div class="card  roles" style="width: 18rem;">
+<div class="card  roles" >
     <div class="card-header">
         <h5 class="listofjobs">List of jobs</h5>
     </div>

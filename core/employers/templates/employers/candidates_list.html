@@ -6,20 +6,41 @@
 
 
 <style>
-    .jobs-single{
-      background-color: #ACE2E1;
-    }
-    .info{
-      background-color: #ACE2E1;
-    }
+ .jobs-single{
+    background-color:white;
+   
+    max-width:90%; 
+    border: 1.5px solid #FFC107;
+    box-shadow: 0 10px 10px rgba(36, 95, 221, 0.5);
+   
+  }
+ 
+  .info{
+    background-color: white;
+    color: #343A40;
+   
+   
+  }
+  .list-group-item {
+    color: #343A40;
+  }
+  .card-body .list-group-item a {
+    color: #0056B3; /* Dark Blue */
+    text-decoration: none;
+  }
+
+  .card-body .list-group-item a:hover {
+    color: #FFC107; /* Yellow */
+    text-decoration: underline;
+  }
   </style>
 
  
-  <h1>hello</h1>
+
   {% for user in users %}
   
   
-  <div class="card mt-3 mb-3 p-4 shadow jobs-single" style="max-width:90%">
+  <div class="card mt-3 mb-3 p-4  jobs-single" style="max-width:90%">
       <div class="row">
         <div class="col-md-4 info">
           <img src="{{user.avatar.url}}" class="img-fluid rounded-start info" alt="OOPS">

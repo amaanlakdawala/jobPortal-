@@ -8,100 +8,152 @@
 {% block content %}
 
 <style>
-    .card-body {
-        border: 1px solid #ced4da; /* Border color */
-        border-radius: 5px; /* Rounded corners */
-        padding: 30px; /* Padding inside the border */
-         /* Left margin to separate from user name and time */
-        overflow-y: auto; /* Add vertical scroll when content exceeds height */
-        max-height: 500px; /* Set maximum height for scrollable area */
-    }
-    .message-body{
+.card {
+    width: 600px;
+    margin: 20px auto;
+    border: 1px solid #ced4da; /* Border color */
+    border-radius: 5px; /* Rounded corners */
+}
 
-        border: 1px solid #ced4da; /* Border color */
-        border-radius: 5px; /* Rounded corners */
-        padding: 10px;
-        max-height: 300px;
-        margin-left: 50px;
+.card-body {
+    border: 1px solid #ced4da; /* Border color */
+    border-radius: 5px; /* Rounded corners */
+     padding: 30px;  
+    overflow-y: auto; /* Add vertical scroll when content exceeds height */
+    max-height: 500px; /* Set maximum height for scrollable area */
+}
 
-    }
-    .message-form {
-        margin-top: 20px;
-        display: flex; /* Use flexbox layout */
-        align-items: center; /* Center align items vertically */
-    }
+.chat_background {
+    background-color: #d6d3d3; /* Light Grey */
+}
 
-    .message-input {
-        flex: 1; /* Take remaining space */
-        width: calc(100% - 80px); /* Adjust for button width */
-        padding: 10px;
-        border: 1px solid #ced4da;
-        border-radius: 5px;
-        outline: none;
-        font-size: 16px;
-        
-        margin: 10px;
-    }
+.message-body {
+    border: 1px solid #ced4da; /* Border color */
+    border-radius: 5px; /* Rounded corners */
+    padding: 10px;
+    max-height: 300px;
+    margin-left: 50px;
+    background-color: #E0F7FA; /* Light Blue for sent messages */
+    color: #0056B3; /* Dark Blue text color */
+}
 
-    .message-input:focus {
-        border-color: #6cb2eb; /* Highlight border color on focus */
-    }
+.message-form {
+    /* margin-top: 20px; */
+    margin-bottom: 5px;
+    display: flex; /* Use flexbox layout */
+    align-items: center; /* Center align items vertically */
+    background-color: #d6d3d3;
+}
 
-    .message-submit {
-        padding: 10px 20px;
-        
-        border: none;
-        border-radius: 5px;
-        background-color: #007bff; /* Blue color for button */
-        color: #fff; /* White text color */
-        cursor: pointer;
-        font-size: 16px;
-        transition: background-color 0.3s;
-    }
+.message-input {
+    flex: 1; /* Take remaining space */
+    width: calc(100% - 80px); /* Adjust for button width */
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    outline: none;
+    font-size: 16px;
+    background-color: #F8F9FA; /* Light Grey */
+    margin: 10px;
+}
 
-    .message-submit:hover {
-        background-color: #0056b3; /* Darker blue color on hover */
-    }
+.message-input:focus {
+    border-color: #6cb2eb; /* Highlight border color on focus */
+}
+
+.message-submit {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #0056B3; /* Dark Blue color for button */
+    color: #fff; /* White text color */
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.message-submit:hover {
+    background-color: #007bff; /* Light Blue color on hover */
+}
     .info{
-      background-color: #ACE2E1;
-    }
-    .tables{
-      background-color: #008DDA;
-    }
-    .custom-table {
-              background-color: #008DDA;
-              border-collapse: collapse;
-              width: 100%;
-              text-align: center;
-          }
-          
-          .custom-table th,
-          .custom-table td {
-              border: 1px solid #ddd;
-              padding: 8px;
-              text-align: left;
-          }
-          
-          .custom-table th {
-              background-color: #008DDA;
-              color: #fff;
-          }
-          .overview{
+    background-color: white;
+  }
+  .tables{
+    background-color: #0056B3;
+  }
+  .custom-table {
+            background-color: #0056B3;
+            border-collapse: collapse;
+            width: 100%;
             text-align: center;
-          }
+            transition: transform 0.6s ease-in-out;
+        }
+        .custom-table:hover {
+    transform: scale(1.1); /* Zoom in effect on hover */
+}
+        
+        .custom-table th,
+        .custom-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        
+        .custom-table th {
+            background-color: #0056B3;
+            color: #fff;
+        }
+        .overview{
+          text-align: center;
+        }
           .contact{
             color: white;
             text-decoration: none;
           }
+          @keyframes flashAndZoom {
+    0% {
+        color: #0056B3; /* Initial color */
+        transform: scale(1); /* Initial size */
+    }
+    50% {
+        color: #FFC107; /* Midway color */
+        transform: scale(1.5); /* Zoomed in size */
+    }
+    100% {
+        color: #0056B3; /* Final color */
+        transform: scale(1); /* Back to initial size */
+    }
+}
+
+.flashing-header {
+    animation: flashAndZoom 1s infinite; /* Animation lasting 1 second, repeating infinitely */
+    display: inline-block; /* To ensure transform works correctly */
+}
+.latest_jobs{
+    text-align: center;
+
+}
+
+
+.full_filter{
+    background-color: #d6d3d3;
+        height: fit-content;
+        border: 2px solid #FFC107;
+        box-shadow: 0 10px 10px rgba(36, 95, 221, 0.5);
+       
+    }
 </style>
 
+
 <div class="container">
-    <h1 id="testing_chat" class="mt-5 mb-4">Chat</h1>
+    <div class="latest_jobs">
+        <h1 class="mt-4 mb-4 flashing-header">Chat</h1>
+        </div>
 
     <div class="row">
         <div class="col-lg-8">
-            <div class="card">
-                <div class="card-body" id="message-container">
+            <div class="card full_filter">
+                <div class="card-body chat_background"    id="message-container">
                     {% for message in room_messages %}
                         <div class="message mb-4">
                             <div class="message-header">
@@ -119,7 +171,7 @@
                 <form action="" method="POST" class="message-form">
                     {% csrf_token %}
                     <input name="body" class="message-input" placeholder="Write your message here..." required />
-                    <button type="submit" class="message-submit">Send</button>
+                    <button type="submit" class="me-2 message-submit">Send</button>
                 </form>
             </div>
         </div>

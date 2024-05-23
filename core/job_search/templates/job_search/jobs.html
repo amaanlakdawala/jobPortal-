@@ -31,16 +31,99 @@
     text-decoration: underline;
   }
 
+  @media (max-width: 1200px) {
+    .jobs-single {
+        padding: 15px; /* Adjust padding for medium screens */
+    }
+
+    .info {
+        padding: 12px; /* Adjust padding for medium screens */
+    }
+
+    .list-group-item {
+        padding: 8px 12px; /* Adjust padding for medium screens */
+    }
+
+    .card-body .list-group-item a {
+        padding: 8px; /* Adjust padding for medium screens */
+    }
+}
+
+@media (max-width: 992px) {
+    .jobs-single {
+        padding: 10px; /* Adjust padding for smaller screens */
+        max-width: 95%; /* Increase width for smaller screens */
+    }
+
+    .info {
+        padding: 10px; /* Adjust padding for smaller screens */
+    }
+
+    .list-group-item {
+        padding: 6px 10px; /* Adjust padding for smaller screens */
+    }
+
+    .card-body .list-group-item a {
+        padding: 6px; /* Adjust padding for smaller screens */
+    }
+}
+
+@media (max-width: 768px) {
+    .jobs-single {
+        padding: 8px; /* Adjust padding for very small screens */
+        max-width: 100%; /* Full width for very small screens */
+    }
+
+    .info {
+        padding: 8px; /* Adjust padding for very small screens */
+    }
+
+    .list-group-item {
+        padding: 5px 8px; /* Adjust padding for very small screens */
+    }
+
+    .card-body .list-group-item a {
+        padding: 5px; /* Adjust padding for very small screens */
+        font-size: 14px; /* Adjust font size for better readability */
+    }
+}
+
+@media (max-width: 576px) {
+    .jobs-single {
+      width: 63%;
+    padding: 13px;
+    margin-left: 63px;
+    }
+    .responsive{
+      width: 55%;
+    }
+
+    .info {
+        padding: 5px; /* Adjust padding for extra small screens */
+        text-align: center;
+    }
+
+    .list-group-item {
+        padding: 4px 6px; /* Adjust padding for extra small screens */
+        font-size: 14px; /* Adjust font size for better readability */
+    }
+
+    .card-body .list-group-item a {
+        padding: 4px; /* Adjust padding for extra small screens */
+        font-size: 12px; /* Adjust font size for extra small screens */
+    }
+}
+
 
   
 </style>
 
 {% for job in finaljobs %}
 
-<div class="card mt-3 mb-3 p-4  jobs-single">
+<div class="card mt-3 mb-3 p-4 jobs-single">
   <div class="row just_row">
       <div class="col-md-4 info">
-          <img src="{{job.organization.avatar.url}}" class="img-fluid rounded-start info" alt="OOPS">
+          <img src="{{job.organization.avatar.url}}" class="img-fluid rounded-start info responsive" alt="OOPS">
       </div>
       <div class="col-md-8">
           <div class="card-body info">
