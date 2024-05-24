@@ -1,4 +1,7 @@
 {% extends 'emain.html' %}
+{% block title %}
+Messages
+{% endblock %}
 
 {% load static %}
 {% block content %}
@@ -42,7 +45,20 @@
     text-align: center;
 
 }
+
+.delete-button {
+  border: none;
+    position: absolute;
+    top: 10px; /* Adjust as necessary */
+    right: 10px; /* Adjust as necessary */
+}
+.button_border{
+  border: none;
+}
+
 </style>
+
+
 <div class="latest_jobs">
   <h1 class="mt-4 mb-4 flashing-header">Messages</h1>
   </div>
@@ -64,12 +80,15 @@
             <li class="list-group-item info"><strong>Skills </strong>{{room.user.skills}}</li>
             <li class="list-group-item info"><strong>Experience </strong>{{room.user.experience}}</li>
 
-            <form action="" method="POST">
+             <!-- <form action="" method="POST"  class="delete-button">
     
               {% csrf_token %}
               <input type="hidden" name="user_id" value="{{ room.user.id }}">
-              <li class="list-group-item info"><strong><input class="btn btn-primary" type="submit" value="Delete"></strong></li>
-            </form>
+              -->
+              <button class="btn btn-primary delete-button" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal"> <i class="bi bi-x-lg"></i></button> 
+             
+              <!-- <li class="list-group-item info"><strong><input class="btn btn-primary" type="submit" value="Delete"></strong></li> -->
+            <!-- </form> -->
             
             
           </ul>
@@ -80,7 +99,57 @@
     </div>
   </div>
 
+
+
+                                                <!-- MODAL -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          Do You Want To Delete? <br>
+          Once Deleted All The Chats Will Be Deleted.
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+  
+  
+          <form action="" method="POST" >
+      
+            {% csrf_token %}
+            <input type="hidden" name="user_id" value="{{ room.user.id }}">
+            <button type="submit"  class="btn btn-primary">Delete</button>
+           
+            <!-- <li class="list-group-item button_border"><button class="btn btn-primary" type="submit"> <i class="bi bi-x-lg"></i></button></li>  -->
+            <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+              Launch demo modal
+            </button> -->
+            <!-- <li class="list-group-item info"><strong><input class="btn btn-primary" type="submit" value="Delete"></strong></li> -->
+          </form>
+          
+  
+  
+         
+  
+  
+  
+  
+  
+  
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
   {% endfor %}
+  <!-- Button trigger modal -->
+
+
+<!-- Modal -->
 
 
 <!-- <style>

@@ -21,6 +21,7 @@ from django.core.mail import send_mail,EmailMultiAlternatives
 from django.utils import timezone
 from datetime import timedelta
 from django.core.paginator import Paginator
+from django.db.models import Q
 
 # Create your views here.
 
@@ -102,6 +103,7 @@ def job_description(request,pk):
             msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
             msg.attach_alternative(html_content, "text/html")
             msg.send()
+            print("email send")
 
             messages.success(request,"Congratulations! Your Application was Submitted to the Recruiter ")
         
@@ -173,6 +175,15 @@ def job_listing(request):
         if salary !='0':
             jobs = jobs.filter(salary__lte=salary)
             print(jobs)
+
+    if request.GET.get('q'):
+        q = request.GET.get('q')
+    else:
+        q=""
+    print(q)
+    jobs = jobs.filter(Q(role__name__icontains=q))
+
+
     paginator = Paginator(jobs,1)
     page_number = request.GET.get('page')
     finaljobs = paginator.get_page(page_number)

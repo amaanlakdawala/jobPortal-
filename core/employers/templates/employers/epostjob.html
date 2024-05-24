@@ -1,43 +1,61 @@
 {% extends 'emain.html' %}
+
+{% block title %}
+Post Jobs
+{% endblock %}
 {% block content %}
+<style>
+     .label{
+    color: #0056B3;
+  }
+  .update_form{
+    border: 1.5px solid #FFC107;
+    box-shadow: 0 10px 20px rgba(36, 95, 221, 0.5);
+    border-radius: 5px;
+  }
+</style>
 
+<div class="mt-3 col-md-5 mx-auto p-3  update_form">
+    <form action="" method="POST">
+        {% csrf_token %}
+        <h1 class="text-center mb-4 label">Post Jobs</h1>
+        <label for="" class="form-label label">Organization</label>
+        <input type="text" name ='organization'  class="form-control custom-input">
+    
+        <label for="" class="form-label label">Role</label>
+        <input type="text" name ='role'  class="form-control custom-input">
+    
+        <label for="" class="form-label label">Skill</label>
+        <input type="text" name ='skill'  class="form-control custom-input">
+    
+        <label for="" class="form-label label">Salary</label>
+        <input type="text" name ='salary'  class="form-control custom-input">
+    
+        <label for="" class="form-label label">Location</label>
+        <input type="text" name ='location'  class="form-control custom-input">
+    
+        <!-- <label for="">Name</label>
+        <input type="text" name ='name'> -->
+    
+        <label for="" class="form-label label">Job-Type</label>
+        <input type="text" name ='job_type'  class="form-control custom-input">
+    
+        <label for="" class="form-label label">Vacancy</label>
+        <input type="number" name="vacancy"  class="form-control custom-input">
+    
+        <label for="" class="form-label label">Experience</label>
+        <input type="text" name="experience"  class="form-control custom-input">
+    
+        <label for="" class="form-label label">Education</label>
+        <input type="text" name="education"  class="form-control custom-input">
+    
+        <label for="" class="form-label label">Application Date</label>
+        <input type="date" name="application_date"  class="form-control custom-input">
+    
+        <button class="btn btn-primary mt-3" type="submit">Post</button>
+    </form>
+    
+</div>
 
-<form action="" method="POST">
-    {% csrf_token %}
-    <label for="">Organization</label>
-    <input type="text" name ='organization'>
-
-    <label for="">Role</label>
-    <input type="text" name ='role'>
-
-    <label for="">Skill</label>
-    <input type="text" name ='skill'>
-
-    <label for="">Salary</label>
-    <input type="text" name ='salary'>
-
-    <label for="">Location</label>
-    <input type="text" name ='location'>
-
-    <!-- <label for="">Name</label>
-    <input type="text" name ='name'> -->
-
-    <label for="">Job-Type</label>
-    <input type="text" name ='job_type'>
-
-    <label for="">Vacancy</label>
-    <input type="number" name="vacancy">
-
-    <label for="">Experience</label>
-    <input type="text" name="experience">
-
-    <label for="">Education</label>
-    <input type="text" name="education">
-
-    <label for="">Application Date</label>
-    <input type="date" name="application_date">
-
-    <button type="submit">Post</button>
-</form>
 
 {% endblock %}

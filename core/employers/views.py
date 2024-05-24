@@ -41,7 +41,7 @@ def eprofile(request):
      user_organization_name = request.user.organization
      user_organization = Employers.objects.get(organization=user_organization_name)
      print(f"user org {user_organization}")
-     job_appilcations = JobApplication.objects.filter(jobs__organization = user_organization)
+     job_appilcations = JobApplication.objects.filter(jobs__organization = user_organization).order_by('-appplied_at')
      print(f"jobs application {job_appilcations}")
      context={'employers':employers,'job_appilcations':job_appilcations}
      return render(request,'employers/eprofile.html',context)
@@ -113,11 +113,29 @@ def candidate_description(request,pk):
      context={'user':user}
      return render (request,'employers/candidate_description.html',context)
 
+
+
 def contact(request):
+  
+    context={}
+    if request.method == 'POST':
+        query = request.POST.get('query')
+        print(query)
+        user = request.user
+
+        print(user)
+        c = Complaint.objects.create(user = user,body = query)
+        c.save()
+        messages.success(request, 'Your Message Have Been Delivered And it Will Be Solved Within 24 Hours')
+        return redirect('econtact')  
+    return render (request,'employers/econtact.html',context)     
+    
+
+# def contact(request):
 #     form = ComplaintUser()
 #     context={'form':form}
-    context ={}
-    return render (request,'employers/econtact.html',context)
+#     context ={}
+#     return render (request,'employers/econtact.html',context)
 
 
 def about(request):

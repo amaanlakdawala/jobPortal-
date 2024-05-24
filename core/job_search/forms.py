@@ -19,6 +19,7 @@ class UserForm(ModelForm):
             'skills',
             'bio',
             'education',
+            'experience',
             'location',
             'avatar',
             'cv',

@@ -53,7 +53,10 @@
 } */
 
     </style>
-    <title>Document</title>
+    <title>{% block title %}
+        Document
+        {% endblock %}
+    </title>
 </head>
 <body>
     <div class="container">
@@ -61,14 +64,7 @@
             {% include 'enavbar.html' %}
         </div>
         <div class="row">
-            {% if messages %}
-            <ul class="messages">
-             {% for message in messages %}
-             <li>{{ message }}</li>
-             {% endfor %}
-         </ul>
-         {% endif %}
-
+          
 
             {% block content %}
 
@@ -91,9 +87,9 @@
             <div class="col-md-4">
              <h2 class="footer-header">Quick Links</h2>
              <ul class="quicklinks_list">
-                <li> <p class="footer-text"><a href="" class="footer-link">Search Candidates</a></p></li>
-                <li> <p class="footer-text"><a href="" class="footer-link">Profile</a></p></li>
-                <li> <p class="footer-text"><a href="" class="footer-link">Contact Us</a></p></li>
+                <li> <p class="footer-text"><a href="{% url 'e_search_employee' %}" class="footer-link">Search Employee</a></p></li>
+                <li> <p class="footer-text"><a href="{% url 'eprofile' %}" class="footer-link">Profile</a></p></li>
+                <li> <p class="footer-text"><a href="{% url 'econtact' %}" class="footer-link">Contact Us</a></p></li>
              </ul>
             
             
@@ -103,16 +99,16 @@
             <h2 class="footer-header">Social Handles</h2>
             <div class="d-flex">
                 <h5><i class="bi bi-github social_logo"></i> </h5>
-                <p class="ms-2 footer-text">Git Hub</p>
+                <p class="ms-2 footer-text"><a href="https://github.com/amaanlakdawala" class="footer-link">Git Hub</a></p>
             </div>
             <div class="d-flex">
     
                 <h5><i class="bi bi-instagram social_logo"></i></h5>
-                <p class="ms-2 footer-text">Instagram</p>
+                <p class="ms-2 footer-text"><a href="https://www.instagram.com/amaan_10.06?igsh=MTF5Nm5za21tb3YxZQ%3D%3D" class="footer-link">Instagram</a></p>
             </div>
             <div class="d-flex">
                 <h5><i class="bi bi-linkedin social_logo"></i></h5>
-                <p class="ms-2 footer-text">Linkedin</p>
+               <p class="ms-2 footer-text"><a href="www.linkedin.com/in/dictator-1-0622121ba" class="footer-link">Linkedin</a></p>
             </div>
     
             

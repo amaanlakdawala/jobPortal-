@@ -1,4 +1,7 @@
 {% extends 'main.html' %}
+{% block title %}
+Search Jobs
+{% endblock %}
 
 {% block content %}
 <style>
@@ -23,8 +26,25 @@
     display: flex;
     justify-content: center;
 }
+.search_field {
+    width: 95%;
+            flex-grow: 1;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            text-align: center;
+        }
+        .search_icon {
+            margin-right: 10px;
+            font-size: 20px;
+        }
+        
 </style>
-
+<form action="" method = "GET" class="mt-3 mb-3">
+    <strong> <i class="bi bi-search search_icon"></i> </strong><input class="search_field" name="q" placeholder="Search for Roles ">       
+</form>
     <div class="col-md-9">
         {% include 'job_search/jobs.html' %}
         <nav aria-label="Page navigation example" class="paginator">
