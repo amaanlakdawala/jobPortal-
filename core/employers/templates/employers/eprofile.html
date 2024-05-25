@@ -54,6 +54,13 @@ Profile
     margin: 0 auto; /* Center the element if desired */
     
 }
+.application_view_button{
+  color: white;
+  width: 53%;
+    font-size: 14px;
+    margin-bottom: 5px;
+
+}
 </style>
 
 
@@ -74,14 +81,20 @@ Profile
      
         {% for job_appilcation in job_appilcations %}
 
-
-      <li class="list-group-item roles-list"> <p>{{ forloop.counter }}: Name: <a href="{% url 'candidate_description' job_appilcation.users.id %}"><strong>{{job_appilcation.users.name}}</strong></a></p>
-        <p>Role:  <strong>{{job_appilcation.users.skills}}</strong></p>
+<form  action="" method="POST">
+  {% csrf_token %}
+  <input type="hidden" name="user_id"  value="{{job_appilcation.users.id}}">
+  <li class="list-group-item roles-list"> <p>{{ forloop.counter }}: Name: <a href="{% url 'candidate_description' job_appilcation.users.id %}" ><strong>{{job_appilcation.users.name}}</strong></a></p>
+    <p>Role:  <strong>{{job_appilcation.users.skills}}</strong></p>
       
-        <p>Applied On: <strong> {{job_appilcation.appplied_at}}
-        </strong></p>
-        <hr>               
-    </li>
+    <p>Applied On: <strong> {{job_appilcation.appplied_at}}
+    </strong></p>
+    <button class="application_view_button btn btn-primary" type="submit">View Application</button>
+                  
+</li>
+</form>
+      
+       
     
     
     {% endfor %}

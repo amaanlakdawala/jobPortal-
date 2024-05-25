@@ -73,7 +73,7 @@ Profile
                   <p class="card-text mt-2 main"> <strong>Skills:</strong> {{request.user.skills}}</p>
                   <p class="card-text mt-2 main"><strong>Bio:</strong> {{request.user.bio}}</p>
                   {% if request.user.cv %}
-                  <p class="card-text main"><strong>Resume:</strong>  <a href="{{request.user.cv.url}}">Download Now</a></p>
+                  <p class="card-text main"><strong>Resume:</strong>  <a href="{{request.user.cv.url}}">Click Here To View</a></p>
                   {% else %}
                   <p class="card-text main"><strong>Resume:</strong> Not uploaded yet</p>
                   {% endif %}

@@ -49,7 +49,7 @@ def home(request):
     jobs_to_delete = today-timedelta(days=30)
     deleted = Jobs.objects.filter(created__lt = jobs_to_delete)
     deleted.delete()
-    paginator = Paginator(jobs,1)
+    paginator = Paginator(jobs,2)
     page_number = request.GET.get('page')
     finaljobs = paginator.get_page(page_number)
     totalpages = finaljobs.paginator.num_pages
@@ -69,7 +69,7 @@ def roles(request):
 def jobs(request):
     user = User.objects.all()
     jobs = Jobs.objects.all()
-    paginator = Paginator(jobs,1)
+    paginator = Paginator(jobs,5)
     page_number = request.GET.get('page')
     finaljobs = paginator.get_page(page_number)
 
@@ -184,7 +184,7 @@ def job_listing(request):
     jobs = jobs.filter(Q(role__name__icontains=q))
 
 
-    paginator = Paginator(jobs,1)
+    paginator = Paginator(jobs,5)
     page_number = request.GET.get('page')
     finaljobs = paginator.get_page(page_number)
     totalpages = finaljobs.paginator.num_pages
@@ -239,6 +239,33 @@ def loginPage(request):
             return render(request, 'job_search/login.html')
 
     return render(request, 'job_search/login.html')
+
+
+def change_password(request):
+    if request.method == "POST":
+        email = request.POST.get('email')
+        new_password = request.POST.get('new_password')
+        print(email)
+        print(new_password)
+
+        try:
+            user = User.objects.get(email=email)
+        except User.DoesNotExist:
+            return HttpResponse("User does not exist")
+
+        # Set the new password
+        user.set_password(new_password)
+        
+        # Save the user object to update the password
+        user.save()
+
+        return redirect('loginPage')
+
+    return render(request, 'job_search/change_password.html')
+
+
+
+
 # def loginPage(request):
 #     error  =None
    

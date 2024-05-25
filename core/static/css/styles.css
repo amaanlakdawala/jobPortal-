@@ -200,10 +200,10 @@ h2 {
 	text-decoration: beige;
 }
 
-.links a:hover,
+/* .links a:hover,
 .links a:nth-child(2) {
 	color: #FFC107;
-}
+} */
 
 input[type="submit"] {
 	border: none;

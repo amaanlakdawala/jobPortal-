@@ -43,8 +43,43 @@ def eprofile(request):
      print(f"user org {user_organization}")
      job_appilcations = JobApplication.objects.filter(jobs__organization = user_organization).order_by('-appplied_at')
      print(f"jobs application {job_appilcations}")
+     
+     if request.method == "POST":
+         print("inside form")
+         user_id = request.POST.get('user_id')
+         print(f"user_id {user_id}")
+         user = User.objects.get(id = user_id)
+         user_email = user.email
+         user_name = user.name
+         employer_name = request.user.name
+         employer_organization = request.user.organization
+         print(f"user Name = {user_name}")
+         print(f"user Emial = {user_email}")
+         print(f"Employer name = {employer_name}")
+         subject='Confirmation'
+         from_email = 'talenttrovejobs@gmail.com'
+         to = f'{user_email}'
+         text_content = f"Hey {user_name} this is to inform you that your application have been viewed by the recruiter "
+         html_content = f"<p>Hey <strong>{user_name}</strong> this is to inform you that your application have been viewed by the recruiter <strong> {employer_name}</strong> from Company <strong> {employer_organization} </strong></p>"
+         msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
+         msg.attach_alternative(html_content, "text/html")
+         msg.send()
+         print("email send")
+         return redirect ("candidate_description",pk=user_id)
+     
+
+
+     
+
+     
+
+
+
+
      context={'employers':employers,'job_appilcations':job_appilcations}
      return render(request,'employers/eprofile.html',context)
+
+
 
 def e_search_employee(request):
      users = User.objects.filter(is_employee=True)

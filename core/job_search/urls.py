@@ -15,6 +15,7 @@ urlpatterns = [
     path('about_us/',about_us,name='about_us'),
     path('umessage/',message,name='umessage'),
     path('chat/<int:pk>/',chat,name='uchat'),
+    path('change_password',change_password,name='change_password'),
 
     # path('resume_viewer/<int:pk>/', resume_viewer, name='resume_viewer'),
 
