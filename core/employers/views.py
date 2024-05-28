@@ -1,6 +1,4 @@
-
 from django.contrib import messages
-
 from django.http import HttpResponse
 from django.shortcuts import render,redirect
 from job_search.models import *
@@ -274,9 +272,11 @@ def message(request):
      rooms = Room.objects.filter(employer=user)
      if request.method == 'POST':       
         user_id = request.POST.get('user_id')
+        print(user_id)
         if user_id:
             try:
                 user = User.objects.get(id=user_id)
+                print(user.email)
                 room = Room.objects.get(user=user)
                 print(room)
                 room.delete()
@@ -300,13 +300,27 @@ def chat(request,pk):
      room_messages=room.message_set.all()
      
      if request.method=="POST":
-        message = Message.objects.create(
+          message = Message.objects.create(
             user=request.user,
             room=room,
             body=request.POST.get('body')          
         )
+          user_email = room.user.email
+          user_name = room.user.name
+          employer_name = request.user.name
+          print(user_email)
+          print(user_name)
+          subject='Message'
+          from_email = 'talenttrovejobs@gmail.com'
+          to = f'{user_email}'
+          text_content = f"Hey {user_name} this is to inform you that an HR {employer_name} Has Message You "
+          html_content = f"<p>Hey <strong>{user_name}</strong> this is to inform you that an HR  {employer_name} Has Message You</p>"
+          msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
+          msg.attach_alternative(html_content, "text/html")
+          msg.send()
+          messages.success(request,"Congratulations! An email has been send to Candidate")
        
-        return redirect ('chat', pk=room.id)
+          return redirect ('chat', pk=room.id)
 
      context={'room':room,'room_messages':room_messages}
 

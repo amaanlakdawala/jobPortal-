@@ -85,7 +85,7 @@ Messages
               {% csrf_token %}
               <input type="hidden" name="user_id" value="{{ room.user.id }}">
               -->
-              <button class="btn btn-primary delete-button" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal"> <i class="bi bi-x-lg"></i></button> 
+              <button class="btn btn-primary delete-button" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal{{room.id}}"> <i class="bi bi-x-lg"></i></button> 
              
               <!-- <li class="list-group-item info"><strong><input class="btn btn-primary" type="submit" value="Delete"></strong></li> -->
             <!-- </form> -->
@@ -102,7 +102,7 @@ Messages
 
 
                                                 <!-- MODAL -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="exampleModal{{room.id}}" tabindex="-1" aria-labelledby="exampleModalLabel{{room.id}}" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -110,7 +110,7 @@ Messages
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          Do You Want To Delete? <br>
+          Do You Want To Delete <strong>{{ room.user.name }}</strong> Messages?<br>
           Once Deleted All The Chats Will Be Deleted.
         </div>
         <div class="modal-footer">

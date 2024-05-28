@@ -1,0 +1,168 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block title %}
+Payment Page
+{% endblock %}
+
+{% block content %}
+<style>
+ body, html {
+    height: 100%;
+    margin: 0;
+    font-family: Arial, sans-serif;
+   
+}
+  
+.background-animation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: linear-gradient(270deg, #064a07, #104E8B, #2F4F4F);
+    background-size: 800% 800%;
+    animation: backgroundAnimation 16s ease infinite;
+}
+
+@keyframes backgroundAnimation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+.payment_heading{
+  font-weight: bolder;
+  color: #444444;
+}
+ 
+.custom-card {
+  
+    max-width: 80%; /* Adjust the width of the card */
+    margin: auto; /* Center the card */
+     /* Set a maximum height for the card */
+    overflow: hidden; /* Prevent overflow */
+    background-color: #b5b7b9;
+    border: 1.5px solid #FFC107;
+    box-shadow: 0 10px 10px rgba(36, 95, 221, 0.5);
+    z-index: 1;
+}
+
+.custom-img {
+    width: 62%; /* Adjust the size of the image */
+    height: auto; /* Maintain aspect ratio */
+}
+
+.col-md-6 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px; /* Add some padding to avoid tight fit */
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 10px; /* Add some padding */
+}
+
+.list-group-item {
+    border: none; /* Remove the borders from the list items for a cleaner look */
+    background: none; /* Remove background color for a cleaner look */
+    padding: 5px 0; /* Adjust padding for better spacing */
+}
+
+#rzp-button1 {
+    padding: 10px 20px;
+    font-size: 1.1em;
+}
+.custom-background {
+    background-image: url('{% static "images/payment_yellow.png" %}');
+    background-size: cover;
+    background-position: center;
+}
+.custom-height {
+    height: 500px; /* Adjust the height value as needed */
+}
+.money_flying{
+    width: 71px;
+    height: 68px;
+    margin-bottom: 5px;
+}
+
+
+</style>
+
+<div class="background-animation"></div>
+<div class="mt-3 card custom-card" >
+    <div class="row no-gutters">
+
+        <div class="col-md-6 d-flex justify-content-center align-items-center">
+            <img src="{% static 'images/payment_image.jpg' %}" alt="Payment Image" class="img-fluid custom-img">
+        </div>
+        <div class="col-md-6 d-flex flex-column justify-content-center align-items-center">
+            <div class="card-body text-center">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <h4 class="payment_heading">Unlock Opportunities: Easy Payment Options Await</h4>
+                    </li>
+                    <picture >
+                        <source srcset="https://fonts.gstatic.com/s/e/notoemoji/latest/1f4b8/512.webp" type="image/webp">
+                        <img class="money_flying" src="https://fonts.gstatic.com/s/e/notoemoji/latest/1f4b8/512.gif" alt="💸" width="32" height="32">
+                      </picture>
+                    <li class="list-group-item">
+                        <strong><button id="rzp-button1" class="btn btn-primary">Pay with Razorpay</button></strong>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+  </div>
+  
+
+
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+ var options = {
+    "key": "rzp_test_mv5IZmGRDYEyR3", // Enter the Key ID generated from the Dashboard
+    "amount": "{{ total }}", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+    "currency": "INR",
+    "name": "Acme Corp",
+    "description": "Test Transaction",
+    "image": "https://example.com/your_logo",
+    "order_id": "{{payment.id}}", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+    "handler": function (response){
+      window.location.href = "http://localhost:8000/success_payment"
+    },
+    "prefill": {
+        "name": "Gaurav Kumar",
+        "email": "gaurav.kumar@example.com",
+        "contact": "9000090000"
+    },
+    "notes": {
+        "address": "Razorpay Corporate Office"
+    },
+    "theme": {
+        "color": "#3399cc"
+    }
+};
+var rzp1 = new Razorpay(options);
+rzp1.on('payment.failed', function (response){
+        alert(response.error.code);
+        alert(response.error.description);
+        alert(response.error.source);
+        alert(response.error.step);
+        alert(response.error.reason);
+        alert(response.error.metadata.order_id);
+        alert(response.error.metadata.payment_id);
+});
+document.getElementById('rzp-button1').onclick = function(e){
+    rzp1.open();
+    e.preventDefault();
+}
+
+</script>
+{% endblock %}

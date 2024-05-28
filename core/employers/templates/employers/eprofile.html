@@ -84,7 +84,7 @@ Profile
 <form  action="" method="POST">
   {% csrf_token %}
   <input type="hidden" name="user_id"  value="{{job_appilcation.users.id}}">
-  <li class="list-group-item roles-list"> <p>{{ forloop.counter }}: Name: <a href="{% url 'candidate_description' job_appilcation.users.id %}" ><strong>{{job_appilcation.users.name}}</strong></a></p>
+  <li class="list-group-item roles-list"> <p>{{ forloop.counter }}: Name: <strong>{{job_appilcation.users.name}}</strong></p>
     <p>Role:  <strong>{{job_appilcation.users.skills}}</strong></p>
       
     <p>Applied On: <strong> {{job_appilcation.appplied_at}}

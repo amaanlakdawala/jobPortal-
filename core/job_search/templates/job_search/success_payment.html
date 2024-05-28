@@ -1,0 +1,192 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block title %}
+Payment Page
+{% endblock %}
+
+{% block content %}
+<style>
+    body, html {
+       height: 100%;
+       margin: 0;
+       font-family: Arial, sans-serif;
+      
+   }
+
+   .background-animation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: linear-gradient(270deg, #28a745, #ffc107, #f9d71c, #ffd700);
+    background-size: 800% 800%;
+    animation: backgroundAnimation 16s ease infinite;
+}
+
+@keyframes backgroundAnimation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+   .payment_heading{
+     font-weight: bolder;
+     color: #444444;
+   }
+    
+   .custom-card {
+     
+       max-width: 80%; 
+       margin: auto;  
+       overflow: hidden; 
+       background-color: #b5b7b9;
+       border: 1.5px solid #FFC107;
+       box-shadow: 0 10px 10px rgba(36, 95, 221, 0.5);
+       z-index: 1;
+   }
+   
+   .custom-img {
+       width: 62%; 
+       height: auto; 
+   }
+   
+   .col-md-6 {
+       display: flex;
+       justify-content: center;
+       align-items: center;
+       padding: 10px; 
+   }
+   
+   .card-body {
+       display: flex;
+       flex-direction: column;
+       justify-content: center;
+       align-items: center;
+       text-align: center;
+       padding: 10px;
+   }
+   
+   .list-group-item {
+       border: none; 
+       background: none; 
+       padding: 5px 0; 
+   }
+   
+   #rzp-button1 {
+       padding: 10px 20px;
+       font-size: 1.1em;
+   }
+   .custom-background {
+       background-image: url('{% static "images/payment_yellow.png" %}');
+       background-size: cover;
+       background-position: center;
+   }
+   .custom-height {
+       height: 500px; 
+   }
+   .money_flying{
+       width: 71px;
+       height: 68px;
+       margin-bottom: 5px;
+   }
+   .main_content{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+   
+.celebration_emoji{
+    margin-left: 89px;
+}
+.button_success{
+    margin-left: 100px;
+    width: 40%;
+}
+.dancer_emoji_image{
+   
+    width: 253px;
+    height: 252px;
+}
+.celebration_emoji_image{
+    width: 160px;
+    height: 160px;
+}
+    
+
+   
+   
+   
+   </style>
+    <div class="background-animation"></div>
+<!--    
+    <div class="mt-3 card custom-card" >
+    <div class="row no-gutters">
+        <div class="col-md-6 d-flex flex-column justify-content-center align-items-center">
+            <picture>
+                <source srcset="https://fonts.gstatic.com/s/e/notoemoji/latest/1f483_1f3fb/512.webp" type="image/webp">
+                <img src="https://fonts.gstatic.com/s/e/notoemoji/latest/1f483_1f3fb/512.gif" alt="💃" width="32" height="32">
+              </picture>
+        </div>
+       
+
+        
+        <div class="col-md-6 d-flex flex-column justify-content-center align-items-center">
+            <div class="card-body text-center background-animation">
+                <ul class="list-group list-group-flush">
+                    <div>
+                        <picture>
+                            <source srcset="https://fonts.gstatic.com/s/e/notoemoji/latest/1f38a/512.webp" type="image/webp">
+                            <img src="https://fonts.gstatic.com/s/e/notoemoji/latest/1f38a/512.gif" alt="🎊" width="32" height="32">
+                          </picture>
+                    </div>
+                    <li class="list-group-item">
+                        <h1 class="payment_heading">Success Payment</h1>
+                    </li>
+                    
+    
+                    <li class="list-group-item">
+                        <strong><a href="{% url 'home'%}"><button class="button_success btn btn-primary">Click here</button></a></strong>
+                    </li>
+                    
+                   
+                </ul>
+            </div>
+
+        </div>
+    </div>
+  </div> -->
+
+<div class="mt-4 mb-4 main_content">
+<div class="dancer_emoji">
+    <picture>
+        <source srcset="https://fonts.gstatic.com/s/e/notoemoji/latest/1f483_1f3fb/512.webp" type="image/webp">
+        <img class="dancer_emoji_image" src="https://fonts.gstatic.com/s/e/notoemoji/latest/1f483_1f3fb/512.gif" alt="💃" width="38" height="38">
+      </picture>
+
+   
+        </div>
+        <div>
+            <ul class="list-group list-group-flush">
+                <div>
+                    <picture class="celebration_emoji">
+                        <source srcset="https://fonts.gstatic.com/s/e/notoemoji/latest/1f38a/512.webp" type="image/webp">
+                        <img class="celebration_emoji_image" src="https://fonts.gstatic.com/s/e/notoemoji/latest/1f38a/512.gif" alt="🎊" width="32" height="32">
+                      </picture>
+                </div>
+                <li class="list-group-item">
+                    <h1 class="payment_heading">Success Payment</h1>
+                </li>
+                
+
+                <li class="list-group-item">
+                    <strong><a href="{% url 'home'%}"><button class="mt-4 button_success btn btn-primary">Next</button></a></strong>
+                </li>
+                
+               
+            </ul>
+        </div>
+    
+    </div>
+{% endblock %}

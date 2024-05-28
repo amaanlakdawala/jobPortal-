@@ -22,6 +22,7 @@ from django.utils import timezone
 from datetime import timedelta
 from django.core.paginator import Paginator
 from django.db.models import Q
+import razorpay
 
 # Create your views here.
 
@@ -371,3 +372,69 @@ def chat(request,pk):
 
      return render(request,'job_search/uchat.html',context)
 
+# def makepayment(request):
+#     context = {}
+    # o = Order.objects.filter(uid =request.user.id )
+    # sum = 0
+    # for i in o:
+    #     sum = sum + i.pid.price*i.quantity
+    #     oid = i.order_id
+    # context['sum'] = 1000     
+    # client = razorpay.Client(auth=("rzp_test_mv5IZmGRDYEyR3", "NsZOUKGdQeR9SIAAN26TyE8D"))
+    # data = { "amount": sum, "currency": "INR", "receipt": 120 }
+    # payment = client.order.create(data=data)
+    # print(payment)   
+    # return render (request,"payment.html",context)
+
+
+def makepayment(request):
+    context = {}
+    total = 50000  # Total amount in INR
+    amount_in_paise = total * 100  # Convert to paise for Razorpay
+
+    context['total'] = amount_in_paise  # Pass the amount in paise to the template
+    
+    client = razorpay.Client(auth=("rzp_test_mv5IZmGRDYEyR3", "NsZOUKGdQeR9SIAAN26TyE8D"))
+    data = {"amount": amount_in_paise, "currency": "INR", "receipt": "5000"}
+
+    payment = client.order.create(data=data)
+    context['payment'] = payment
+        
+    return render(request, 'job_search/payment.html', context)
+
+# def makepayment(request):
+#     context = {}
+#     total = 50000
+#     context['total'] = total *100
+    
+#     client = razorpay.Client(auth=("rzp_test_mv5IZmGRDYEyR3", "NsZOUKGdQeR9SIAAN26TyE8D"))
+#     data = { "amount": total, "currency": "INR", "receipt": "5000" }
+
+#     payment = client.order.create(data=data)
+#     print(payment)   
+
+        
+      
+
+#     context['payment'] = payment
+        
+        
+   
+ 
+        
+#     return render (request,'job_search/payment.html')
+
+def success_payment(request):
+    user_name = "Amaan"
+    user_email = 'amaanlakdawala301@gmail.com'      
+    subject = 'Payment'
+    from_email = 'talenttrovejobs@gmail.com'
+    to = f'{user_email}'
+    text_content = f"Hey {user_name}, this is to inform you that Your Payment Has Been Processed"
+    html_content = f"<p>Hey <strong>{user_name}</strong>, this is to inform you that Your Payment Has Been Processed</p>"
+    msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
+    msg.attach_alternative(html_content, "text/html")
+    msg.send()
+    return render (request,'job_search/success_payment.html')
+        
+    
