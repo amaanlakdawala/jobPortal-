@@ -3,7 +3,6 @@ from django.http import HttpResponse
 from django.shortcuts import render,redirect
 from job_search.models import *
 from django.contrib.auth import authenticate,login,logout
-# from .forms import UserRegistrationForm,UserLoginForm
 from django.core.paginator import Paginator
 from .forms import UserForm
 from django.core.mail import send_mail,EmailMultiAlternatives
@@ -17,8 +16,7 @@ def home(request):
           
           context={'jobs':jobs}
           return render (request,'employers/ehome.html',context)
-     # else:
-     #      return render (request,'employers/elogin.html')
+    
          
            
     
@@ -136,7 +134,7 @@ def candidate_description(request,pk):
                msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
                msg.attach_alternative(html_content, "text/html")
                msg.send()
-               messages.success(request,"Congratulations! An email has been send to Candidate")
+               
          
                room = Room.objects.create(user = user_instance,employer = employer)
                room.save()
@@ -232,32 +230,6 @@ def eupdate(request,pk):
 def ejobdescription(request,pk):
       job = Jobs.objects.get(id=pk)  
       user = request.user
-     #  user_email = request.user.email
-     #  user_name = request.user.name
-     #  applied=True
-     #  if request.method =='POST':
-     #    if JobApplication.objects.filter(users=user,jobs=job).exists():
-     #        messages.warning(request,"You Have already Applied For Job")
-     #        applied = True
-     #        print("success")
-     #        return redirect('job_description',pk=job.id)
-     #    else:
-     #        applied=False
-     #        job_appilcation  = JobApplication(users = user,jobs=job)
-     #        job_appilcation.save()
-
-
-          #   subject='Confirmation'
-          #   from_email = 'talenttrovejobs@gmail.com'
-          #   to = f'{user_email}'
-          #   text_content = f"Hey {user_name} this is to inform you that your resume have been submitted "
-          #   html_content = f"<p>Hey <strong>{user_name}</strong> this is to inform you that your resume have been submitted.</p>"
-          #   msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
-          #   msg.attach_alternative(html_content, "text/html")
-          #   msg.send()
-
-          #   messages.success(request,"Congratulations! Your Application was Submitted to the Recruiter ")
-        
       context={'job':job}       
       return render(request,'employers/ejobdescription.html',context)
 
@@ -275,9 +247,10 @@ def message(request):
         print(user_id)
         if user_id:
             try:
-                user = User.objects.get(id=user_id)
+                user1 = User.objects.get(id=user_id)
+
                 print(user.email)
-                room = Room.objects.get(user=user)
+                room = Room.objects.filter(user=user1,employer = request.user)
                 print(room)
                 room.delete()
                 print("Room deleted")
@@ -326,146 +299,6 @@ def chat(request,pk):
 
      return render(request,'employers/chat.html',context)
 
-
-
-
-
-
-# def jobs(request):
-#     user = request.user
-#     jobs = Jobs.objects.all()
-#     jobs = Jobs.objects.filter(user=user)
-
-    
-    
-#     # Fetch jobs posted by the logged-in employer
-#     employer_jobs = Jobs.objects.filter(organization=employer)
-    
-#     context = {'jobs': jobs}
-#     return render(request, 'employers/ejobs.html', context)
-
-    
-#     paginator = Paginator(jobs,1)
-#     page_number = request.GET.get('page')
-#     finaljobs = paginator.get_page(page_number)
-
-
-#     context={'jobs':jobs,'user':user}
-#     return render(request,'employers/ejobs.html',context)
-
-
-# class EmployersAuthBackend(object):
-#     def authenticate(self, request, email=None, password=None):
-#         try:
-#             employer = Employers.objects.get(email=email)
-#             if employer.check_password(password):
-#                 return employer
-#         except Employers.DoesNotExist:
-#             return None
-        
-
-# def login_view(request):
-   
-#     if request.method=='POST':
-#         email = request.POST.get('email')
-#         password = request.POST.get('password')
-#         print(email)
-#         print(password)
-#         try:
-#             employer = Employers.objects.get(email=email)
-#             print(employer)
-#         except:
-#             messages.error(request,'User not found')
-       
-            
-#         user = authenticate(request,email=email,password=password)
-#         print(user)
-#         if user is not None:
-#             messages.error(request,'User found')
-#             print("user autheticated")
-#             login(request,user)
-#             return redirect('ehome')
-#         else:
-#             print("not found")
-#             messages.error(request,'Email or Password is incorrect')   
-#     context={}
-#     return render (request,'employers/elogin.html',context)
-
-
-
-
-
-
-# def login_view(request):
-#     if request.method == 'POST':
-#         email = request.POST.get('email')
-#         password = request.POST.get('password')
-        
-#         user = authenticate(request, email=email, password=password)
-#         print(user)
-#         if user is not None:
-#             login(request, user)
-#             return redirect('ehome')  # Redirect to home page after successful login
-#         else:
-#             print("Some error occurred")
-#             return render(request, 'employers/elogin.html')
-#     else:
-#         return render(request, 'employers/elogin.html')
-
-# # Implement logout view
-# def logout_view(request):
-#     logout(request)
-#     return redirect('login') 
-
-
-
-# def register(request):
-#     form = UserRegistrationForm()
-#     if request.method == 'POST':
-#         form = UserRegistrationForm(request.POST)
-#         if form.is_valid():
-#             user = form.save(commit=False)
-#             user.email = user.email.lower()
-#             user.save()
-#             login(request, user)
-#             return redirect('eloginPage')
-#         else:
-#             messages.error(request, "Some error occurred")
-#     return render(request, 'employers/eregister.html', {'form': form})
-
-
-# def login_view(request):
-    
-#     if request.method == 'POST':
-#         email = request.POST.get('email')
-#         password = request.POST.get('password')
-#         print("Received email:", email)  
-#         print("Received password:", password) 
-#         try:
-#             user = Employers.objects.get(email=email)
-#             print(user)
-#         except:
-#             messages.error(request,'User not found')
-
-#         user = authenticate(request,email=email,password=password)
-#         print(user)
-#         if user is not None:
-#             login(request,user)
-#             return redirect('ehome')
-#         else:
-#             messages.error(request,'Email or Password is incorrect')   
-#     context={}
-#     return render (request,'employers/elogin.html',context)
-
-       
-#         user = authenticate(request, email=email, password=password)
-#             print(user)
-#             if user is not None:
-#                 login(request, user)
-#                 return redirect('ehome')  # Redirect to home page after successful login
-#             else:
-#                 messages.error(request, 'Invalid email or password.')
-#     return render(request, 'employers/elogin.html', {'form': form})
 
 
 

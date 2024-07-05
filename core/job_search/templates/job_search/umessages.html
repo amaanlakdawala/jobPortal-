@@ -47,11 +47,31 @@ Messages
     text-align: center;
 
 }
+.payment_link{
+  text-align: center;
+  color: #0056B3;
+text-decoration: none;
+  transition: transform 0.3s ease-in-out;
+}
+.payment_link:hover{
+  transform: scale(1.05);
+  color: #FFC107;
+}
+
 </style>
 
 <div class="latest_jobs">
   <h1 class="mt-4 mb-4 flashing-header">Messages</h1>
+  
   </div>
+
+
+  {% if payment_check %}
+  <a class="payment_link" href=""><p class="mt-4 mb-4 payment_link">Already a Prime Member</p></a>
+  {% else %}
+  <a class="payment_link" href="{% url 'payment'%}"><p class="mt-4 mb-4 payment_link">Want much Faster Response? <br> (Become a Prime Member)</p></a>
+   {% endif %}
+
 
 {% for room in rooms %}
 

@@ -170,6 +170,14 @@ class Complaint (models.Model):
 
     def __str__(self):
         return f"Complaint from {self.user} is  {self.body [0:50]}"
+    
+
+class Payment(models.Model):
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    payment = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"payment done by {self.user}"
 
 
         

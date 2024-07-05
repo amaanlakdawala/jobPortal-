@@ -24,5 +24,6 @@ urlpatterns = [
     
     path('',include('job_search.urls')),
     path('employers/',include('employers.urls')),
+    path('api/',include('job_search.api.urls'))
 ]
 urlpatterns+=static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
